@@ -42,7 +42,7 @@ class user(models.Model):
     last_name = models.CharField(max_length=30)
     email = models.CharField(max_length=30)
     birthday = models.DateField()
-    weight = models.Integer()
+    weight = models.IntegerField()
     password = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
