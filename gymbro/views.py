@@ -20,7 +20,10 @@ def show_workout(request,workout_id):
     return render(request,'workout.html')  
 
 def show_exercise(request,exercise_id):
-    return render(request,'exercise.html')
+    # context = {
+    #     "exercises": 
+    # }
+    return render(request,'exercise.html',context)
 
 def show_myprofile(request):
     return render(request,'Profile.html')    
