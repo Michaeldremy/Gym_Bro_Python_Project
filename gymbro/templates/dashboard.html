@@ -8,12 +8,18 @@
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
     <script src="{% static '/js/main.js'%}"></script>
     <link rel="stylesheet" href="{% static '/css/nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static '/css/dashboard.css' %}">
     <script src="https://kit.fontawesome.com/69a83d4766.js" crossorigin="anonymous"></script>
 </head>
+<style>
+    body {
+    background-image: url("{% static '/imgs/gym_photo.jpg' %}");
+}
+</style>
 <body>
 
         <header>
-            <img class="logo" src="Gym_Bro_logo.png" alt="logo">
+            <img class="logo" src="/static/imgs/Gym_Bro_logo.png" alt="logo">
             <nav>
                 <ul class="nav_links">
                     <li><a href="/myprofile">Profile</a></li>
@@ -26,14 +32,13 @@
         <form action="/workout/{{workout_id}}">
             {% csrf_token %}
             {% for i in all_workouts %}
-            <input type="hidden" name="workout" value="{{i.id}}"/>
-            <button type="submit">{{i.weekday}} - {{i.name}}</button>
+                <div class="weekday">
+                    <input type="hidden" name="workout" value="{{i.id}}"/>
+                    <button id="buttonbig" type="submit">{{i.weekday}} - {{i.name}}</button>
+                </div>
             {% endfor %}
-    </form>
+        </form>
             
-    
-
-
     </div>
 
 
