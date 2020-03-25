@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%load static%}
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="{% static '/static/css/nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static '/static/css/ProfilePage.css' %}">
+</head>
+<body>
+    <header>
+        <img class="logo" src="/static/imgs/Gym_Bro_logo.png" alt="logo">
+        <nav>
+            <ul class="nav_links">
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Home</a></li>
+            </ul>
+        </nav>
+        <a class="cta" href="#"><button>Workout</button></a>
+    </header>
+    <div class="card">
+        <div class="info">
+            <!-- Use Jinja to put info from our Database in the Code below -->
+            <div class="name">Michael Remy</div>
+            <div class="divider"></div>
+            <!-- Use Jinja to put info from our Database in the code below -->
+            <!-- Character limit for validatior should be no more than 180. -->
+            <div class="bio">
+                Fitness has always been at the top of my mind,
+                when I workout I felt like I acheived greatness knowing that
+                all those other people who didn't work out won't live as long
+                as I do! :)
+            </div>
+            <!-- If we want to work on adding friends between users -->
+            <button id="friend_button">Add Friend</button>
+        <div class="photo"></div>
+        </div>
+    </div>
+</body>
+</html>
