@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 import bcrypt
 from .models import *
+from chartit import DataPool, Chart, PivotDataPool, PivotChart
 
 # Renders
 
@@ -19,10 +20,14 @@ def dashboard(request):
 def show_workout(request,workout_id):
     return render(request,'workout.html')  
 
-def show_exercise(request,exercise_id):
-    # context = {
-    #     "exercises": 
-    # }
+def show_exercise(request,workout_id, exercise_id):
+    this_workout = Workout.objects.get(id=workout_id)
+    this_exercise = Exercise.objects.get(id=exercise_id)
+    context = {
+        "this_workout": this_workout,
+        "this_exercise": this_exercise,
+        "exercise_sets": Set.objects.filter(exercise=this_exercise)
+    }
     return render(request,'exercise.html',context)
 
 def show_the_team(request):
@@ -79,7 +84,7 @@ def create_user(request):
         weight = request.POST['form_weight']
         rawPassword = request.POST['form_password']
         hashPass = bcrypt.hashpw(rawPassword.encode(), bcrypt.gensalt()).decode()
-        newUser = User.objects.create(first_name=fname, desc="none", last_name=lname, email=email, weight=weight, password=hashPass)
+        newUser = User.objects.create(first_name=fname, desc="none", last_name=lname, email=email, weight=weight, password=hashPass, profile_picture="default1.png")
         request.session['user_id'] = newUser.id
         return redirect("/home")
 
@@ -104,4 +109,33 @@ def login(request):
             else:
                 messages.error(request, "wrong password")
                 return redirect('/')
+    return redirect('/')
+
+
+# Post Requests for Workout
+def begin_workout(request):
+    this_user = User.objects.get(id=request.session['user_id'])
+    this_workout = Workout.objects.get(id=request.POST['workout_id'])
+    this_workout.users.add(this_user)
+    this_workout.save()
+    return redirect(f'/exercise/{this_workout.id}') ## need to redirect to /workout/workout_id
+
+def add_sets_data(request,workout_id,exercise_id):
+    this_user = User.objects.get(id=request.session['user_id'])
+    this_workout = Workout.objects.get(id=workout_id)
+    this_exercise = Exercise.objects.get(id=exercise_id)
+    exercise_sets = Set.objects.filter(exercise=this_exercise)
+    sum_weight = 0
+    sum_reps = 0
+    for i in exercise_sets:
+        i.weight = request.POST[f'{i.id}_weight']
+        i.reps = request.POST[f'{i.id}_reps']
+        i.save()
+        sum_weight += int(i.weight)*int(i.reps)
+        sum_reps += int(i.reps)
+    compute_avg = sum_weight/sum_reps
+    newStat = Stat.objects.create(user=this_user,exercise=this_exercise,lbs_rep=compute_avg)    
+    return HttpResponse("Added") ## need to redirect to /workout/workout_id
+def logout(request):
+    request.session.flush()
     return redirect('/')
