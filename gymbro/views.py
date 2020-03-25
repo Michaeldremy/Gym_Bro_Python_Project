@@ -21,3 +21,25 @@ def show_exercise(request,exercise_id):
 
 def show_myprofile(request):
     return render(request,'myprofile.html')    
+
+
+#POST
+def create_user(request):
+    errors = User.objects.user_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect('/')
+    else:
+        fname = request.POST['form_first_name']
+        lname = request.POST['form_last_name']
+        email = request.POST['form_email']
+        weight = request.POST['form_weight']
+        rawPassword = request.POST['form_password']
+        hashPass = bcrypt.hashpw(rawPassword.encode(), bcrypt.gensalt()).decode()
+        newUser = User.objects.create(first_name=fname, last_name=lname, email=email, weight=weight, password=hashPass)
+        request.session['user_id'] = newUser.id
+        return redirect("/home")
+
+def login(request):
+    pass
