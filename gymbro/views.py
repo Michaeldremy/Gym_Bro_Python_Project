@@ -28,6 +28,18 @@ def show_exercise(request,exercise_id):
 def show_myprofile(request):
     return render(request,'myprofile.html')    
 
+def day(request):
+    this_workout=Workout.objects.get(weekday='Sunday')
+    context={
+        'workouts':Workout.objects.get(weekday='Sunday'),
+        'sets': Set.objects.all(),
+        'exercises':Exercise.objects.filter(workout=this_workout)
+    }
+    return render(request,'day.html',context)
+
+def exercise(request):
+    return render(request,'exercise.html')
+
 
 #POST
 def create_user(request):

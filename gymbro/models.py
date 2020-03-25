@@ -54,13 +54,14 @@ class Workout(models.Model):
 class Exercise(models.Model):
     name = models.CharField(max_length=45)
     workout = models.ManyToManyField(Workout, related_name="exercises")
+    goalrep = models.IntegerField(default=8)
+    rest = models.IntegerField(default=90)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class Set(models.Model):
     reps =models.IntegerField()
     weight = models.IntegerField()
-    rest = models.IntegerField()
     exercise = models.ForeignKey(Exercise, related_name="sets",on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

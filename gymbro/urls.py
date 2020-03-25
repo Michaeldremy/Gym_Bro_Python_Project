@@ -11,4 +11,7 @@ urlpatterns = [
     path('create_user', views.create_user),
     path('login', views.login),
     path('begin_workout', views.begin_workout),
+    path('day',views.day),
+    path('exercise',views.exercise)
+
 ]
