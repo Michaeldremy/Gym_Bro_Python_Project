@@ -26,7 +26,11 @@ def show_exercise(request,exercise_id):
     return render(request,'exercise.html',context)
 
 def show_myprofile(request):
-    return render(request,'myprofile.html')    
+    userid = request.session['user_id']
+    context = {
+        'user' : User.objects.get(id=userid),
+    }
+    return render(request,'Profile.html', context)    
 
 def day(request):
     this_workout=Workout.objects.get(weekday='Sunday')
@@ -55,7 +59,7 @@ def create_user(request):
         weight = request.POST['form_weight']
         rawPassword = request.POST['form_password']
         hashPass = bcrypt.hashpw(rawPassword.encode(), bcrypt.gensalt()).decode()
-        newUser = User.objects.create(first_name=fname, last_name=lname, email=email, weight=weight, password=hashPass)
+        newUser = User.objects.create(first_name=fname, last_name=lname, email=email, weight=weight, password=hashPass, profile_picture="default1.png")
         request.session['user_id'] = newUser.id
         return redirect("/home")
 
