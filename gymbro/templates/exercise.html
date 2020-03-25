@@ -1,44 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
-    <title>Exercise</title>
-    <script src='http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
-    <script src="{% static '/js/main.js'%}"></script>
-    <link rel="stylesheet" href="{% static '/css/nav_bar.css' %}">
-    <link rel="stylesheet" href="{% static '/css/dashboard.css' %}">
-    <script src="https://kit.fontawesome.com/69a83d4766.js" crossorigin="anonymous"></script>
-</head>
-<style>
-    body {
-    background-image: url("{% static '/imgs/gym_photo.jpg' %}");
-}
-</style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static '/css/nav_bar.css' %}">
+    </head>
 <body>
+    <header>
+        <img class="logo" src="/static/imgs/Gym_Bro_logo.png" alt="logo">
+        <nav>
+            <ul class="nav_links">
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Home</a></li>
+            </ul>
+        </nav>
+        <a class="cta" href="#"><button>Workout</button></a>
+    </header>
+    for info in exercises 
+    <h1>{{exercises.name}}</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+                <label for="info.weight"></label>
+                <input style="width: 3%;" type="number" name="info.weight">lbs
+                
+                <label for="info.rep"></label>
+                <input style="width: 3%;" type="number" name="info.rep">reps
+    </form>
+    <button onclick="timedText()">Try it</button>
 
-        <header>
-            <img class="logo" src="/static/imgs/Gym_Bro_logo.png" alt="logo">
-            <nav>
-                <ul class="nav_links">
-                    <li><a href="/myprofile">Profile</a></li>
-                    <li><a href="/home">Home</a></li>
-                </ul>
-            </nav>
-            <a class="cta" href="/workout/{{workout_id}}"><button>Workout</button></a>
-        </header>
-    <div class="container">
+<p id="rest">Click on "Try it". I will display when two, four, and six seconds have passed.</p>
 
-        {% for i in all_workouts %}
-            <div class="weekday">
-                <input type="hidden" name="workout" value="{{i.id}}"/>
-                <button id="buttonbig" type="submit">{{i.weekday}} - {{i.name}}</button>
-            </div>
-        {% endfor %}
-      
-    </div>
+<script>
+function timedText() {
+  setTimeout(myTimeout1, 8000) 
+  setTimeout(myTimeout2, 12000) 
+}
+function myTimeout1() {
+  document.getElementById("rest").innerHTML = "Get Ready!";
+}
+function myTimeout2() {
+  document.getElementById("rest").innerHTML = "Go Workout!";
+}
 
-
+</script>
+    
 </body>
 </html>
