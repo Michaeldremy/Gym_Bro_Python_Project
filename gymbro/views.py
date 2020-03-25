@@ -7,8 +7,8 @@ from chartit import DataPool, Chart, PivotDataPool, PivotChart
 # Renders
 
 def Reg_and_Login_index(request):
-    # if 'user_id' not in request.session:
-    #     return redirect('/')
+    if 'user_id' not in request.session:
+        return redirect('/')
     return render(request, 'LogReg.html')
 
 def dashboard(request):
@@ -30,12 +30,32 @@ def show_exercise(request,workout_id, exercise_id):
     }
     return render(request,'exercise.html',context)
 
+def show_the_team(request):
+    return render(request,'our_team.html')
+
 def show_myprofile(request):
-    userid = request.session['user_id']
     context = {
-        'user' : User.objects.get(id=userid),
+        'profile_info': User.objects.get(id=request.session['user_id'])
     }
-    return render(request,'Profile.html', context)    
+    return render(request,'myprofile.html', context)    
+
+def edit_profile(request):
+    if request.method =='POST':
+        errors = User.objects.edit_form_validator(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value, extra_tags=key)
+            return redirect('/edit_profile')
+        c = User.objects.get(id=request.session['user_id'])
+        c.first_name = request.POST['form_first_name']
+        c.last_name = request.POST['form_last_name']
+        c.desc = request.POST['form_desc']
+        c.save()
+        return redirect('/myprofile')
+    context = {
+        'profile_info': User.objects.get(id=request.session['user_id'])
+    }
+    return render(request, 'edit_myprofile.html' , context)
 
 def day(request):
     this_workout=Workout.objects.get(weekday='Sunday')
@@ -64,7 +84,7 @@ def create_user(request):
         weight = request.POST['form_weight']
         rawPassword = request.POST['form_password']
         hashPass = bcrypt.hashpw(rawPassword.encode(), bcrypt.gensalt()).decode()
-        newUser = User.objects.create(first_name=fname, last_name=lname, email=email, weight=weight, password=hashPass, profile_picture="default1.png")
+        newUser = User.objects.create(first_name=fname, desc="none", last_name=lname, email=email, weight=weight, password=hashPass, profile_picture="default1.png")
         request.session['user_id'] = newUser.id
         return redirect("/home")
 
