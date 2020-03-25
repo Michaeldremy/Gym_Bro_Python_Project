@@ -23,6 +23,7 @@ header {
     align-items: center;
     padding: 15px 10%;
     background-color: #24252a;
+    /* Might need to delete margin later */
 }
 
 .logo {
