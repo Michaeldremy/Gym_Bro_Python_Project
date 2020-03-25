@@ -26,9 +26,9 @@ class UserManager(models.Manager):
     def login_validator(self, postData):
         errors = {}
         email_regex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-        if len(postData['login_email']) < 3:
+        if len(postData['form_email']) < 3:
             errors["invalid_email"] = "Not a valid email"
-        elif not email_regex.match(postData['login_email']):
+        elif not email_regex.match(postData['form_email']):
             errors["invalid_email"] = "Not a valid email"
         return errors
         

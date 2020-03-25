@@ -42,4 +42,24 @@ def create_user(request):
         return redirect("/home")
 
 def login(request):
-    pass
+    if request.method=='POST':
+        errors = User.objects.login_validator(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            print("error in login method is running")
+            return redirect('/')
+        user_login = User.objects.filter(email=request.POST['form_email']) 
+        print(f"user login={user_login}")
+        if user_login: 
+            logged_user = user_login[0] 
+            print(f"logged_user={logged_user}")
+            print(bcrypt.checkpw(request.POST['form_password'].encode(), logged_user.password.encode()))
+            if bcrypt.checkpw(request.POST['form_password'].encode(), logged_user.password.encode()):
+                request.session['user_id'] = logged_user.id
+                print("login succesful")
+                return redirect('/home')
+            else:
+                messages.error(request, "wrong password")
+                return redirect('/')
+    return redirect('/')
