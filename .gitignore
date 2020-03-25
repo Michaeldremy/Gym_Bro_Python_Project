@@ -5,3 +5,4 @@ python_project/__pycache__
 gymbro/migrations/__pycache__/__init__.cpython-38.pyc
 gymbro/migrations/0001_initial.py
 gymbro/migrations/__pycache__/0001_initial.cpython-38.pyc
+.DS_Store

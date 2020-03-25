@@ -66,3 +66,11 @@ class Set(models.Model):
     exercise = models.ForeignKey(Exercise, related_name="sets",on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Stat(models.Model):
+    user = models.ForeignKey(User, related_name="stats", on_delete=models.CASCADE)
+    exercise = models.ForeignKey(Exercise, related_name="stats", on_delete=models.CASCADE)
+    lbs_rep = models.IntegerField()
+    date = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
