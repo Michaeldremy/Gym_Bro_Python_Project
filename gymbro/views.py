@@ -7,8 +7,6 @@ from chartit import DataPool, Chart, PivotDataPool, PivotChart
 # Renders
 
 def Reg_and_Login_index(request):
-    if 'user_id' not in request.session:
-        return redirect('/')
     return render(request, 'LogReg.html')
 
 def dashboard(request):
