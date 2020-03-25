@@ -15,25 +15,20 @@ class UserManager(models.Manager):
         email_regex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if not email_regex.match(postData['form_email']):
             errors["invalid_email"] = "Not a valid email"
-        if postData['form_password'] != postData['form_confirm_pw']:
+        if postData['form_password'] != postData['form_confirm']:
             errors["confirm_password"] = "Passwords do not match"
         elif len(postData['form_password']) < 8:
             errors["password_length"] = "Passwords must be at least 8 characters"
             #convert date time from a string to a number
             # make sure release date is in the past
-        try:    
-            if datetime.strptime(postData['form_birthday'], "%Y-%m-%d") > datetime.now():
-                errors['no_future_birth'] = "Cannot enter a future date for birth date"
-        except:
-                errors['empty_birthday'] = "Birth date required"
         return errors
 
     def login_validator(self, postData):
         errors = {}
         email_regex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-        if len(postData['login_email']) < 3:
+        if len(postData['form_email']) < 3:
             errors["invalid_email"] = "Not a valid email"
-        elif not email_regex.match(postData['login_email']):
+        elif not email_regex.match(postData['form_email']):
             errors["invalid_email"] = "Not a valid email"
         return errors
         
@@ -47,7 +42,7 @@ class User(models.Model):
     update_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
 
-exit
+
 # Workout Models
 class Workout(models.Model):
     name = models.CharField(max_length=45)
@@ -59,13 +54,14 @@ class Workout(models.Model):
 class Exercise(models.Model):
     name = models.CharField(max_length=45)
     workout = models.ManyToManyField(Workout, related_name="exercises")
+    goalrep = models.IntegerField(default=8)
+    rest = models.IntegerField(default=90)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class Set(models.Model):
     reps =models.IntegerField()
     weight = models.IntegerField()
-    rest = models.IntegerField()
     exercise = models.ForeignKey(Exercise, related_name="sets",on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

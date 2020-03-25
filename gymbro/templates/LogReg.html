@@ -18,7 +18,7 @@
 <body>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="#">
+            <form action="create_user" method="POST">
                 {% csrf_token %}
                 <h1>Create Account</h1>
                 <!-- <div class="social-container"> we don't have this functionality yet
@@ -27,19 +27,20 @@
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div> 
                 <span>or use your email for registration</span>-->
-                <div style="padding: 0px;">
-                    <input type="text" style="width: 10em; margin-left: 0px;" placeholder="First Name"/>
-                    <input type="text" style="width: 10em;" placeholder="Last Name"/>
+                <div style="padding: 0px; justify-content: space-between;">
+                    <input name="form_first_name" type="text" style="width: 10em; margin-left: 0px;" placeholder="First Name"/>
+                    <input name="form_last_name" type="text" style="width: 10em;" placeholder="Last Name"/>
                 </div>
-                <input type="email" placeholder="Email"/>
-                <input type="number" placeholder="Weight lbs"/>
-                <input type="password" placeholder="Password"/>
-                <input type="password" placeholder="Confirm Password"/>
+                <input name="form_email" type="email" placeholder="Email"/>
+                <input name="form_weight" type="number" placeholder="Weight lbs"/>
+                <input name="form_password" type="password" placeholder="Password"/>
+                <input name="form_confirm" type="password" placeholder="Confirm Password"/>
                 <button>Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="#">
+            <form action="/login" method="POST">
+                {% csrf_token %}
                 <h1>Sign in</h1>
                 <!-- <div class="social-container">
                     <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -47,8 +48,8 @@
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <span>or use your account</span> -->
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input name="form_email" type="email" placeholder="Email" />
+                <input name="form_password" type="password" placeholder="Password" />
                 <a href="#">Forgot your password?</a>
                 <button>Sign In</button>
             </form>

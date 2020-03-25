@@ -8,5 +8,8 @@ urlpatterns = [
     path('workout/<int:workout_id>', views.show_workout),
     path('exercise/<int:exercise_id>', views.show_exercise),
     path('myprofile', views.show_myprofile),
-    path('day',views.day)
+    path('create_user', views.create_user),
+    path('login', views.login),
+    path('day',views.day),
+    path('exercise',views.exercise)
 ]

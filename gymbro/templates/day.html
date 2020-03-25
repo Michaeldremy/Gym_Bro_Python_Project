@@ -18,9 +18,8 @@
         </nav>
         <a class="cta" href="#"><button>Workout</button></a>
     </header>
-    {% for info in workouts %}
-    <h1>{{info.weekday}} - {{info.name}}</h1>
-    {% endfor %}
+    
+    <h1>{{workouts.weekday}} - {{workouts.name}}</h1>
     <table>
         <thead>
             <tr>
@@ -30,12 +29,12 @@
                 <th>Rest</th>
             </tr>
         </thead>
-        {% for info in sets %}
+        {% for info in exercises %}
         <tbody>
             <tr>
-                <td>{{info.exercises.name}}</td>
-                <!-- <td>{{info.exercises.sets}}</td> -->
-                <td>{{info.rep}}</td>
+                <td>{{info.name}}</td>
+                <td>{{info.sets.count}}</td>
+                <td>{{info.goalrep}}</td>
                 <td>{{info.rest}} seconds</td>
             </tr>
         </tbody>

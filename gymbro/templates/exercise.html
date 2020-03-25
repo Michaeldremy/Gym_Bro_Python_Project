@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         {% load static %}
-        <link rel="stylesheet" href="{% static nav_bar.css %}">
+        <link rel="stylesheet" href="{% static '/css/nav_bar.css' %}">
     </head>
 <body>
     <header>
@@ -18,8 +18,8 @@
         </nav>
         <a class="cta" href="#"><button>Workout</button></a>
     </header>
-    for info in Set
-    <h1>info.exercise.name</h1>
+    for info in exercises 
+    <h1>{{exercises.name}}</h1>
     <form action="" method="POST">
         {% csrf_token %}
                 <label for="info.weight"></label>
@@ -34,8 +34,8 @@
 
 <script>
 function timedText() {
-  setTimeout(myTimeout1, 8500) 
-  setTimeout(myTimeout2, 9000) 
+  setTimeout(myTimeout1, 8000) 
+  setTimeout(myTimeout2, 12000) 
 }
 function myTimeout1() {
   document.getElementById("rest").innerHTML = "Get Ready!";
