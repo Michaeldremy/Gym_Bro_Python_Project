@@ -20,4 +20,11 @@ def show_exercise(request,exercise_id):
     return render(request,'exercise.html')
 
 def show_myprofile(request):
-    return render(request,'myprofile.html')    
+    return render(request,'myprofile.html')   
+
+def day(request):
+    context={
+        'workouts': Workout.objects.get(weekday="Sunday"),
+        'sets': Set.objects.all(),
+    }
+    return render(request,'day.html',context)

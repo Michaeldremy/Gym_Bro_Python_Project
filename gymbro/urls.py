@@ -7,5 +7,6 @@ urlpatterns = [
     path('home', views.dashboard),
     path('workout/<int:workout_id>', views.show_workout),
     path('exercise/<int:exercise_id>', views.show_exercise),
-    path('myprofile', views.show_myprofile)
+    path('myprofile', views.show_myprofile),
+    path('day',views.day)
 ]

@@ -5,7 +5,7 @@ import re
 class UserManager(models.Manager):
     def user_validator(self, postData):
         errors = {}
-        filter_email = user.objects.filter(email=postData['form_email'])
+        filter_email = User.objects.filter(email=postData['form_email'])
         if len(filter_email) > 0:
             errors['email_taken'] = "An account with this email already exists"
         if len(postData['form_first_name']) < 2:
@@ -41,17 +41,13 @@ class User(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.CharField(max_length=30)
-<<<<<<< HEAD
-    birthday = models.DateField()
-=======
->>>>>>> dabd0e657d47f2d7b85772d98299c8db303e8913
     weight = models.IntegerField()
     password = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
 
-
+exit
 # Workout Models
 class Workout(models.Model):
     name = models.CharField(max_length=45)
