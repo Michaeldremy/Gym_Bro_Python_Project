@@ -4,12 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
-    <title>Gym Bro Login and Register</title>
+    <title>Home</title>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
     <script src="{% static '/js/main.js'%}"></script>
     <link rel="stylesheet" href="{% static '/css/nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static '/css/dashboard.css' %}">
     <script src="https://kit.fontawesome.com/69a83d4766.js" crossorigin="anonymous"></script>
 </head>
+<style>
+    body {
+    background-image: url("{% static '/imgs/gym_photo.jpg' %}");
+}
+</style>
 <body>
 
         <header>
@@ -28,14 +34,13 @@
         <form action="/workout/{{workout_id}}">
             {% csrf_token %}
             {% for i in all_workouts %}
-            <input type="hidden" name="workout" value="{{i.id}}"/>
-            <button type="submit">{{i.weekday}} - {{i.name}}</button>
+                <div class="weekday">
+                    <input type="hidden" name="workout" value="{{i.id}}"/>
+                    <button id="buttonbig" type="submit">{{i.weekday}} - {{i.name}}</button>
+                </div>
             {% endfor %}
-    </form>
+        </form>
             
-    
-
-
     </div>
 
 

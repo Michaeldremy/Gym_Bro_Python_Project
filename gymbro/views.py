@@ -11,13 +11,19 @@ def Reg_and_Login_index(request):
     return render(request, 'LogReg.html')
 
 def dashboard(request):
-    return render(request,'dashboard.html') 
+    context = {
+        "all_workouts": Workout.objects.all()
+    }
+    return render(request,'dashboard.html',context) 
 
 def show_workout(request,workout_id):
     return render(request,'workout.html')  
 
 def show_exercise(request,exercise_id):
-    return render(request,'exercise.html')
+    # context = {
+    #     "exercises": 
+    # }
+    return render(request,'exercise.html',context)
 
 def show_myprofile(request):
     return render(request,'myprofile.html')    
@@ -33,6 +39,7 @@ def day(request):
 
 def exercise(request):
     return render(request,'exercise.html')
+
 
 #POST
 def create_user(request):

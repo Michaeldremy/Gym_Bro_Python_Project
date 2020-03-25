@@ -12,4 +12,5 @@ urlpatterns = [
     path('login', views.login),
     path('day',views.day),
     path('exercise',views.exercise)
+
 ]
