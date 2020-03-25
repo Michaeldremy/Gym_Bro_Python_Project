@@ -11,6 +11,7 @@ urlpatterns = [
     path('create_user', views.create_user),
     path('login', views.login),
     path('day',views.day),
-    path('exercise',views.exercise)
+    path('exercise',views.exercise),
+    path('logout',views.logout),
 
 ]

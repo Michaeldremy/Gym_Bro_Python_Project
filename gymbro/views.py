@@ -81,3 +81,7 @@ def login(request):
                 messages.error(request, "wrong password")
                 return redirect('/')
     return redirect('/')
+
+def logout(request):
+    request.session.flush()
+    return redirect('/')
