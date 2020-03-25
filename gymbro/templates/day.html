@@ -5,11 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         {% load static %}
+        <script src='http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+        <link href="http://www.cssscript.com/wp-includes/css/sticky.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static '/css/day.css' %}">
         <link rel="stylesheet" href="{% static '/css/nav_bar.css' %}">
+
+        <title>test</title>
+        <script src="{% static '/js/day.js'%}"></script>
     </head>
+    <style>
+        body {
+        background-image: url("{% static '/imgs/day_pic.jfif' %}");
+        }
+    </style>
 <body>
     <header>
-        <img class="logo" src="/static/imgs/Gym_Bro_logo.png" alt="logo">
+        <img class="logo" src="/static/imgs/Gym_Bro_logo.png\" alt="logo">
         <nav>
             <ul class="nav_links">
                 <li><a href="#">Profile</a></li>
@@ -20,27 +31,35 @@
         <a class="cta" href="#"><button>Workout</button></a>
     </header>
     
-    <h1>{{workouts.weekday}} - {{workouts.name}}</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Exercises</th>
-                <th>Sets</th>
-                <th>Reps</th>
-                <th>Rest</th>
-            </tr>
-        </thead>
-        {% for info in exercises %}
-        <tbody>
-            <tr>
-                <td>{{info.name}}</td>
-                <td>{{info.sets.count}}</td>
-                <td>{{info.goalrep}}</td>
-                <td>{{info.rest}} seconds</td>
-            </tr>
-        </tbody>
-        {% endfor %}
-    </table>
+        
+            <main>
+                <div class="container">
+                <h2 >{{workouts.weekday}} - {{workouts.name}}</h2>
+            <table >
+                <thead>
+                    <tr>
+                        <th>Exercises</th>
+                        <th>Sets</th>
+                        <th>Reps</th>
+                        <th>Rest</th>
+                    </tr>
+                </thead>
+                {% for info in exercises %}
+                <tbody>
+                    <tr>
+                        <td><a id="exercisename" href="">{{info.name}}</a></td>
+                        <td>{{info.sets.count}}</td>
+                        <td>{{info.goalrep}}</td>
+                        <td>{{info.rest}} seconds</td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        
+
     
+
+    </div>
+</main>
 </body>
 </html>
