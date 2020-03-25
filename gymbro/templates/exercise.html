@@ -18,6 +18,31 @@
         </nav>
         <a class="cta" href="#"><button>Workout</button></a>
     </header>
+    <div class="container">
+        <ol>
+        <p>{{this_exercise.name}}</p>
+        <p>Goal {{this_exercise.sets.count}} sets x {{this_exercise.goalrep}} reps each</p>
+        <form action="/add_sets_data/{{this_workout.id}}/{{this_exercise.id}}" method="POST">
+            {% csrf_token %}
+            {% for i in exercise_sets %}
+                <li>
+                    <label for="{{i.id}}_weight">weight:</label>
+                    <input style="width: 5%; margin:0.5em;" type="number" name="{{i.id}}_weight">lbs
+                    <label for="{{i.id}}_reps">x</label>
+                    <input style="width: 5%; margin:0.5em;" type="number" name="{{i.id}}_reps">reps
+                </li>
+            {% endfor %}
+            <button type="submit">Submit</button>
+        </form>
+        </ol>
+    </div>
+
+
+
+
+
+
+
     for info in exercises 
     <h1>{{exercises.name}}</h1>
     <form action="" method="POST">
