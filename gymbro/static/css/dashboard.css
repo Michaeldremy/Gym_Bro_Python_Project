@@ -1,0 +1,34 @@
+/* This is importing Montserrat Font */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+body {
+    background-color: #24252a;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 95%; 
+
+}
+background-image {
+    opacity: 50%;
+}
+
+.container {
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+}
+
+.weekday {
+    padding-top: 1.5em;
+    margin: 0.5em;
+    display: flex;
+    
+}
+
+#buttonbig {
+    width: 30%;
+    height: 3em;
+    border-radius: 1em;
+    margin-left: auto;
+    margin-right: auto;
+}

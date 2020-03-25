@@ -26,9 +26,9 @@ class UserManager(models.Manager):
     def login_validator(self, postData):
         errors = {}
         email_regex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-        if len(postData['login_email']) < 3:
+        if len(postData['form_email']) < 3:
             errors["invalid_email"] = "Not a valid email"
-        elif not email_regex.match(postData['login_email']):
+        elif not email_regex.match(postData['form_email']):
             errors["invalid_email"] = "Not a valid email"
         return errors
         
@@ -54,13 +54,14 @@ class Workout(models.Model):
 class Exercise(models.Model):
     name = models.CharField(max_length=45)
     workout = models.ManyToManyField(Workout, related_name="exercises")
+    goalrep = models.IntegerField(default=8)
+    rest = models.IntegerField(default=90)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class Set(models.Model):
     reps =models.IntegerField()
     weight = models.IntegerField()
-    rest = models.IntegerField()
     exercise = models.ForeignKey(Exercise, related_name="sets",on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
