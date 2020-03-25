@@ -7,20 +7,20 @@
     <title>Gym Bro Login and Register</title>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
     <script src="{% static '/js/main.js'%}"></script>
-    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/nav_bar.css' %}">
     <script src="https://kit.fontawesome.com/69a83d4766.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
         <header>
-            <img class="logo" src="Gym_Bro_logo.png" alt="logo">
+            <img class="logo" src="/static/imgs/Gym_Bro_logo.png" alt="logo">
             <nav>
                 <ul class="nav_links">
                     <li><a href="/myprofile">Profile</a></li>
                     <li><a href="/home">Home</a></li>
                 </ul>
             </nav>
-            <a class="cta" href="/workout/{{today}}"><button>Workout</button></a>
+            <a class="cta" href="/workout/{{workout_id}}"><button>Workout</button></a>
         </header>
     <div class="container">
         <form action="/workout/{{workout_id}}">
