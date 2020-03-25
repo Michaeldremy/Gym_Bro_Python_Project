@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%load static%}
+    <title>The Team</title>
+    <link rel="stylesheet" href="{% static '/css/nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static '/css/our_team.css' %}">
+</head>
+<body>
+    <header>
+        <img class="logo" src="/static/imgs/Gym_Bro_logo.png" alt="logo">
+        <nav>
+            <ul class="nav_links">
+                <li><a href="/myprofile">Profile</a></li>
+                <li><a href="/home">Home</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+        <a class="cta" href="/workout/{{workout_id}}"><button>Workout</button></a>
+    </header>
+        <div class="container">
+        <div class="team-section">
+            <h1>Our Team</h1>
+            <span class="border"></span>
+        <div class="ps">
+            <a href="#Michael"><img src="/static/imgs/Profile_Michael.png" alt=""></a>
+            <a href="#Theary"><img src="/static/imgs/Profile_Theary.jpg" alt=""></a>
+            <a href="#Chris"><img src="/static/imgs/Profile_Chris.jpg" alt=""></a>
+            <a href="#Richard"><img src="/static/imgs/Profile_Michael.png" alt=""></a>
+            <a href="#Jancy"><img src="/static/imgs/Profile_Michael.png" alt=""></a>
+            <a href="#Praneeth"><img src="/static/imgs/Profile_Michael.png" alt=""></a>
+        </div>
+        <div class="section" id="Michael">
+            <span class="name">Michael Remy</span>
+            <span class="border"></span>
+            <p>
+                Michael lives in Redmond and is soon to be married for 3 years. Michael loves the outdoors especially mountain biking when the weather is nice.
+                Other than the outdoors he is into video games and of course took a new interest in learning to code.
+            </p>
+        </div>
+
+        <div class="section" id="Theary">
+            <span class="name">Sotheary Ouk</span>
+            <span class="border"></span>
+            <p>
+                Still waiting for a description.....
+            </p>
+        </div>
+        
+        <div class="section" id="Chris">
+            <span class="name">Chris Holley</span>
+            <span class="border"></span>
+            <p>
+                Description I am Chris
+            </p>
+        </div>
+
+        <div class="section" id="Richard">
+            <span class="name">Richard Lee</span>
+            <span class="border"></span>
+            <p>
+                I am Richard Lee, hello!
+            </p>
+        </div>
+
+        <div class="section" id="Jancy">
+            <span class="name">Jancy Joseph</span>
+            <span class="border"></span>
+            <p>
+                I am classified FBI Agent, fear me!
+            </p>
+        </div>
+
+        <div class="section" id="Praneeth">
+            <span class="name">Praneeth Kommidi</span>
+            <span class="border"></span>
+            <p>
+                We are going to all get jobs at Google!
+            </p>
+        </div>
+
+        </div>
+        </div>
+</body>
+</html>
