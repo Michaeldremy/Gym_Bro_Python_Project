@@ -1,5 +1,5 @@
-gymbro\__pycache__
-gymbro\migrations
+gymbro/__pycache__/
+gymbro/migrations/
 db.sqlite3
-python_project\__pycache__
-gymbro/migrations/__pycache__/__init__.cpython-38.pyc
+gymbro/__pycache__/models.cpython-38.pyc
+gymbro/__pycache__/urls.cpython-38.pyc
