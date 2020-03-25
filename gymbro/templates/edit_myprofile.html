@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="{% static '/css/nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static '/css/edit_myprofile.css' %}">
+</head>
+<body>
+    <header>
+        <img class="logo" src="/static/imgs/Gym_Bro_logo.png" alt="logo">
+        <nav>
+            <ul class="nav_links">
+                <li><a href="/meet_the_team">Meet the Team</a></li>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+        <a class="cta" href="/workout/{{workout_id}}"><button>Workout</button></a>
+    </header>
+    <div class="card">
+        <form class="submission-form" action="/edit_profile" method="POST">
+            {% csrf_token %}
+            <label for="first_name">First Name</label>
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.extra_tags == "form_first_name" %}
+            <p>{{message}}</p>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            <input type="text" id="first_name" name="form_first_name" value="{{profile_info.first_name}}">
+            <label for="last_name">Last Name</label>
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.extra_tags == "form_last_name" %}
+            <p>{{message}}</p>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            <input type="text" id="last_name" name="form_last_name" value="{{profile_info.last_name}}">
+            <label for="desc">Description</label>
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.extra_tags == "form_desc" %}
+            <p>{{message}}</p>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            <textarea name="form_desc" id="desc" rows="4">{{profile_info.desc}}</textarea>
+            <button id="sendBtn">Submit Changes</button>
+        </form>
+        </div>
+    </div>
+</body>
+</html>

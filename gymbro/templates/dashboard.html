@@ -22,24 +22,24 @@
             <img class="logo" src="/static/imgs/Gym_Bro_logo.png" alt="logo">
             <nav>
                 <ul class="nav_links">
-                    <li><a href="#">Meet the Team</a></li>
+                    <li><a href="/meet_the_team">Meet the Team</a></li>
                     <li><a href="/myprofile">Profile</a></li>
                     <li><a href="/home">Home</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 </ul>
             </nav>
             <a class="cta" href="/workout/{{workout_id}}"><button>Workout</button></a>
         </header>
     <div class="container">
-        <form action="/workout/{{workout_id}}">
+        {% for workout in all_workouts %}
+            <form action="/begin_workout" method="post">
             {% csrf_token %}
-            {% for i in all_workouts %}
-                <div class="weekday">
-                    <input type="hidden" name="workout" value="{{i.id}}"/>
-                    <button id="buttonbig" type="submit">{{i.weekday}} - {{i.name}}</button>
-                </div>
-            {% endfor %}
-        </form>
+            <div class="weekday">
+                <input type="hidden" name="workout_id" value="{{workout.id}}"/>
+                <button id="buttonbig" type="submit">{{workout.weekday}} - {{workout.name}}</button>
+            </div>
+            </form>
+        {% endfor %}
             
     </div>
 
