@@ -13,7 +13,7 @@
         <img class="logo" src="/static/imgs/Gym_Bro_logo.png" alt="logo">
         <nav>
             <ul class="nav_links">
-                <li><a href="#">Meet the Team</a></li>
+                <li><a href="/meet_the_team">Meet the Team</a></li>
                 <li><a href="/home">Home</a></li>
                 <li><a href="#">Logout</a></li>
             </ul>
@@ -21,14 +21,35 @@
         <a class="cta" href="/workout/{{workout_id}}"><button>Workout</button></a>
     </header>
     <div class="card">
-        <form class="submission-form" action="#">
+        <form class="submission-form" action="/edit_profile" method="POST">
             {% csrf_token %}
             <label for="first_name">First Name</label>
-            <input type="text" id="first_name" placeholder="">
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.extra_tags == "form_first_name" %}
+            <p>{{message}}</p>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            <input type="text" id="first_name" name="form_first_name" value="{{profile_info.first_name}}">
             <label for="last_name">Last Name</label>
-            <input type="text" id="last_name" placeholder="">
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.extra_tags == "form_last_name" %}
+            <p>{{message}}</p>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            <input type="text" id="last_name" name="form_last_name" value="{{profile_info.last_name}}">
             <label for="desc">Description</label>
-            <textarea name="desc" id="desc" rows="5" placeholder=""></textarea>
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.extra_tags == "form_desc" %}
+            <p>{{message}}</p>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            <textarea name="form_desc" id="desc" rows="4">{{profile_info.desc}}</textarea>
             <button id="sendBtn">Submit Changes</button>
         </form>
         </div>
