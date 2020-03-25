@@ -2,7 +2,7 @@ from django.db import models
 from datetime import datetime
 import re
 
-class userManager(models.Manager):
+class UserManager(models.Manager):
     def user_validator(self, postData):
         errors = {}
         filter_email = user.objects.filter(email=postData['form_email'])
@@ -41,30 +41,35 @@ class User(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.CharField(max_length=30)
+<<<<<<< HEAD
+    birthday = models.DateField()
+=======
+>>>>>>> dabd0e657d47f2d7b85772d98299c8db303e8913
     weight = models.IntegerField()
     password = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
-    objects = userManager()
+    objects = UserManager()
 
 
 # Workout Models
 class Workout(models.Model):
     name = models.CharField(max_length=45)
     weekday = models.CharField(max_length=15)
-    user = models.ForeignKey(User, related_name="workouts",on_delete=models.CASCADE)
+    users = models.ManyToManyField(User, related_name="workouts")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class Exercise(models.Model):
     name = models.CharField(max_length=45)
-    weight = models.IntegerField()
-    workout = models.ForeignKey(Workout, related_name="exercises", on_delete=models.CASCADE)
+    workout = models.ManyToManyField(Workout, related_name="exercises")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class Set(models.Model):
-    rep =models.IntegerField()
+    reps =models.IntegerField()
     weight = models.IntegerField()
     rest = models.IntegerField()
-    exercise = models.ForeignKey(Exercise, related_name="sets", on_delete=models.CASCADE)
+    exercise = models.ForeignKey(Exercise, related_name="sets",on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
