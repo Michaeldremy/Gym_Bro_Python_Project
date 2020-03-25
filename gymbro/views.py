@@ -20,9 +20,9 @@ def show_workout(request,workout_id):
     return render(request,'workout.html')  
 
 def show_exercise(request,exercise_id):
-    # context = {
-    #     "exercises": 
-    # }
+    context = {
+        "this_exercise": Exercise.objects.get(id=exercise_id)
+    }
     return render(request,'exercise.html',context)
 
 def show_myprofile(request):
@@ -69,3 +69,12 @@ def login(request):
                 messages.error(request, "wrong password")
                 return redirect('/')
     return redirect('/')
+
+
+# Post Requests for Workout
+def begin_workout(request):
+    this_workout = Workout.objects.get(id=request.POST['workout_id'])
+    this_workout.users.add(request.session['user_id'])
+    this_workout.save()
+    request.session['workout_id'] = this_workout.id
+    return redirect(f'/exercise/{this_workout.id}')

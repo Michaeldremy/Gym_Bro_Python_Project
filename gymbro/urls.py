@@ -10,4 +10,5 @@ urlpatterns = [
     path('myprofile', views.show_myprofile),
     path('create_user', views.create_user),
     path('login', views.login),
+    path('begin_workout', views.begin_workout),
 ]

@@ -29,14 +29,8 @@
             <a class="cta" href="/workout/{{workout_id}}"><button>Workout</button></a>
         </header>
     <div class="container">
-
-        {% for i in all_workouts %}
-            <div class="weekday">
-                <input type="hidden" name="workout" value="{{i.id}}"/>
-                <button id="buttonbig" type="submit">{{i.weekday}} - {{i.name}}</button>
-            </div>
-        {% endfor %}
-      
+        {{this_exercise.name}}
+        
     </div>
 
 
