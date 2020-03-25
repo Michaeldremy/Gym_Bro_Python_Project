@@ -14,5 +14,6 @@ urlpatterns = [
     path('day',views.day),
     path('exercise',views.exercise),
     path('add_sets_data/<int:workout_id>/<int:exercise_id>', views.add_sets_data),
+    path('logout',views.logout),
 
 ]

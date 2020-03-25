@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 import bcrypt
 from .models import *
+from chartit import DataPool, Chart, PivotDataPool, PivotChart
 
 # Renders
 
@@ -30,7 +31,11 @@ def show_exercise(request,workout_id, exercise_id):
     return render(request,'exercise.html',context)
 
 def show_myprofile(request):
-    return render(request,'myprofile.html')    
+    userid = request.session['user_id']
+    context = {
+        'user' : User.objects.get(id=userid),
+    }
+    return render(request,'Profile.html', context)    
 
 def day(request):
     this_workout=Workout.objects.get(weekday='Sunday')
@@ -59,7 +64,7 @@ def create_user(request):
         weight = request.POST['form_weight']
         rawPassword = request.POST['form_password']
         hashPass = bcrypt.hashpw(rawPassword.encode(), bcrypt.gensalt()).decode()
-        newUser = User.objects.create(first_name=fname, last_name=lname, email=email, weight=weight, password=hashPass)
+        newUser = User.objects.create(first_name=fname, last_name=lname, email=email, weight=weight, password=hashPass, profile_picture="default1.png")
         request.session['user_id'] = newUser.id
         return redirect("/home")
 
@@ -111,3 +116,6 @@ def add_sets_data(request,workout_id,exercise_id):
     compute_avg = sum_weight/sum_reps
     newStat = Stat.objects.create(user=this_user,exercise=this_exercise,lbs_rep=compute_avg)    
     return HttpResponse("Added") ## need to redirect to /workout/workout_id
+def logout(request):
+    request.session.flush()
+    return redirect('/')
