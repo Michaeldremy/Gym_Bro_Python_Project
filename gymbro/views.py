@@ -31,9 +31,41 @@ def show_exercise(request,workout_id, exercise_id):
 def show_the_team(request):
     return render(request,'our_team.html')
 
+
 def show_myprofile(request):
+    plotdata = \
+        DataPool(
+        series=
+            [{'options': {
+                'source': Stat.objects.all()},
+                'terms': [
+                    'date',
+                    'lbs_rep'
+                ]}
+            ])
+    #Step 2: Create the Chart object
+    cht = Chart(
+            datasource = plotdata,
+            series_options =
+            [{'options':{
+                'type': 'line',
+                'stacking': False},
+                'terms':{
+                'date': [
+                    'lbs_rep']
+                }}],
+            chart_options =
+            {'title': {
+                'text': 'Pounds/reps on a week'},
+            'xAxis': {
+                    'title':{
+                    'text': 'week'}},
+            'YAxis': {
+                    'title': {
+                    'text': 'Pounds/reps'}}})
     context = {
-        'profile_info': User.objects.get(id=request.session['user_id'])
+        'profile_info': User.objects.get(id=request.session['user_id']),
+        'chart_list': [cht]
     }
     return render(request,'myprofile.html', context)    
 
