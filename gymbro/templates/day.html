@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         {% load static %}
-        <script src='http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
-        <link href="http://www.cssscript.com/wp-includes/css/sticky.css" rel="stylesheet" type="text/css">
+        <!-- <script src='http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script> -->
+        <!-- <link href="http://www.cssscript.com/wp-includes/css/sticky.css" rel="stylesheet" type="text/css"> -->
         <link rel="stylesheet" href="{% static '/css/day.css' %}">
         <link rel="stylesheet" href="{% static '/css/nav_bar.css' %}">
 
@@ -23,18 +23,18 @@
         <img class="logo" src="/static/imgs/Gym_Bro_logo.png\" alt="logo">
         <nav>
             <ul class="nav_links">
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="logout">Logout</a></li>
+                <li><a href="/myprofile">Profile</a></li>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
-        <a class="cta" href="#"><button>Workout</button></a>
+
     </header>
     
         
             <main>
                 <div class="container">
-                <h2 >{{workouts.weekday}} - {{workouts.name}}</h2>
+                <h2 >{{workout.weekday}} - {{workout.name}}</h2>
             <table >
                 <thead>
                     <tr>
@@ -44,20 +44,24 @@
                         <th>Rest</th>
                     </tr>
                 </thead>
-                {% for info in exercises %}
                 <tbody>
+                    {% for info in exercises %}
                     <tr>
-                        <td><a id="exercisename" href="">{{info.name}}</a></td>
+                        <td><a id="exercisename" href="/exercise/{{workout.id}}/{{info.id}}">{{info.name}}</a></td>
                         <td>{{info.sets.count}}</td>
                         <td>{{info.goalrep}}</td>
                         <td>{{info.rest}} seconds</td>
                     </tr>
+                    {% endfor %}
+                    {% for stat in user_stats %}
+                    <tr>
+                        {% if stat.exercise in workout.exercises.all %}
+                        <td style="text-decoration: line-through;">{{stat.exercise.name}}</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
                 </tbody>
-                {% endfor %}
             </table>
-        
-
-    
 
     </div>
 </main>
