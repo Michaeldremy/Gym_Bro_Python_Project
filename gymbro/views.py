@@ -34,9 +34,53 @@ def show_exercise(request,workout_id, exercise_id):
 def show_the_team(request):
     return render(request,'our_team.html')
 
+def show_data_visualization(request,link_id):
+    print("I am here",link_id)     
+    if link_id != None:
+        plotdata = \
+        DataPool(
+        series=
+            [{'options': {
+                'source': Stat.objects.filter(user=request.session['user_id'],exercise=Exercise.objects.get(id = link_id)).order_by("date")},
+                'terms': ['date','lbs_rep']}
+            ])
+        #Step 2: Create the Chart object
+        excercisename = Exercise.objects.get(id = link_id).name
+        cht = Chart(
+                datasource = plotdata,
+                series_options =
+                [{'options':{
+                    'type': 'line',
+                    'stacking': False},
+                    'terms':{'date': ['lbs_rep']}}],
+                chart_options =
+                {'title': {
+                    'text': excercisename},
+                'xAxis': {
+                        'title':{
+                        'text': 'Date'}},
+                'YAxis': {
+                        'title': {
+                        'text': 'Average Pounds'}}})
+        context = {
+            'profile_info': User.objects.get(id=request.session['user_id']),
+            'chart_list': [cht],
+            'myexercises': Exercise.objects.all() 
+        }
+        return render(request,'myprofile.html', context) 
+    else:
+        context = {
+            'profile_info': User.objects.get(id=request.session['user_id']), 
+            'myexercises': Exercise.objects.all()    
+        }
+        return render(request,'myprofile.html', context)  
+
+
+
 def show_myprofile(request):
     context = {
-        'profile_info': User.objects.get(id=request.session['user_id'])
+        'profile_info': User.objects.get(id=request.session['user_id']),
+        'myexercises': Exercise.objects.all()      
     }
     return render(request,'myprofile.html', context)    
 
