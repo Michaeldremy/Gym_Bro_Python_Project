@@ -148,6 +148,7 @@ def add_sets_data(request,workout_id,exercise_id):
         compute_avg = 0    
     newStat = Stat.objects.create(user=this_user,exercise=this_exercise,lbs_rep=compute_avg)    
     return redirect(f'/workout/{this_workout.id}')
+    
 def logout(request):
     request.session.flush()
     return redirect('/')
