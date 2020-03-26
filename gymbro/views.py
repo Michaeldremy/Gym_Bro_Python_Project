@@ -3,6 +3,8 @@ from django.contrib import messages
 import bcrypt
 from .models import *
 from chartit import DataPool, Chart, PivotDataPool, PivotChart
+from datetime import date
+import calendar
 
 # Renders
 
@@ -10,13 +12,13 @@ def Reg_and_Login_index(request):
     return render(request, 'LogReg.html')
 
 def dashboard(request):
+    today = date.today()
+    today_wkout = Workout.objects.get(weekday=today.strftime("%A"))
     context = {
-        "all_workouts": Workout.objects.all()
+        "all_workouts": Workout.objects.all(),
+        "today_wkout_id": today_wkout.id
     }
     return render(request,'dashboard.html',context) 
-
-def show_workout(request,workout_id):
-    return render(request,'workout.html')  
 
 def show_exercise(request,workout_id, exercise_id):
     this_workout = Workout.objects.get(id=workout_id)
@@ -26,6 +28,7 @@ def show_exercise(request,workout_id, exercise_id):
         "this_exercise": this_exercise,
         "exercise_sets": Set.objects.filter(exercise=this_exercise)
     }
+    request.session['restt']=this_exercise.rest
     return render(request,'exercise.html',context)
 
 def show_the_team(request):
@@ -55,12 +58,19 @@ def edit_profile(request):
     }
     return render(request, 'edit_myprofile.html' , context)
 
-def day(request):
-    this_workout=Workout.objects.get(weekday='Sunday')
+def show_workout(request,workout_id):
+    this_user = User.objects.get(id=request.session['user_id'])
+    this_workout=Workout.objects.get(id=workout_id)
+    user_stats = Stat.objects.filter(user=this_user).filter(date=date.today())
+    all_exercises = Exercise.objects.filter(workout=this_workout)
+
+    for stat in user_stats:
+        all_exercises = all_exercises.exclude(id=stat.exercise.id)
+
     context={
-        'workouts':Workout.objects.get(weekday='Sunday'),
-        'sets': Set.objects.all(),
-        'exercises':Exercise.objects.filter(workout=this_workout)
+        'workout': this_workout,
+        'user_stats': user_stats,
+        'exercises': all_exercises
     }
     return render(request,'day.html',context)
 
@@ -111,7 +121,7 @@ def begin_workout(request):
     this_workout = Workout.objects.get(id=request.POST['workout_id'])
     this_workout.users.add(this_user)
     this_workout.save()
-    return redirect(f'/exercise/{this_workout.id}') ## need to redirect to /workout/workout_id
+    return redirect(f'/workout/{this_workout.id}')
 
 def add_sets_data(request,workout_id,exercise_id):
     this_user = User.objects.get(id=request.session['user_id'])
@@ -121,14 +131,23 @@ def add_sets_data(request,workout_id,exercise_id):
     sum_weight = 0
     sum_reps = 0
     for i in exercise_sets:
-        i.weight = request.POST[f'{i.id}_weight']
-        i.reps = request.POST[f'{i.id}_reps']
+        post_weight = request.POST[f'{i.id}_weight']
+        post_reps = request.POST[f'{i.id}_reps']
+        if post_weight == "" or post_weight == "0" or post_reps == "" or post_reps == "0":
+            errors={"confirm": "ask user"}
+            return redirect(f'/exercise/{this_workout.id}/{this_exercise.id}')
+        else:
+            i.weight = post_weight
+            i.reps = post_reps
         i.save()
         sum_weight += int(i.weight)*int(i.reps)
         sum_reps += int(i.reps)
-    compute_avg = sum_weight/sum_reps
+    try:    
+        compute_avg = sum_weight/sum_reps
+    except:
+        compute_avg = 0    
     newStat = Stat.objects.create(user=this_user,exercise=this_exercise,lbs_rep=compute_avg)    
-    return HttpResponse("Added") ## need to redirect to /workout/workout_id
+    return redirect(f'/workout/{this_workout.id}')
 def logout(request):
     request.session.flush()
     return redirect('/')

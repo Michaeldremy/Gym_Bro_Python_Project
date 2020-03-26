@@ -1,0 +1,177 @@
+*{
+    background: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding:0;
+}
+header{
+    opacity: 95%; 
+}
+
+main{
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #edf0f1;
+}
+input{
+    width: 50px;
+    border-style: hidden;
+    background-color: #edf0f1;
+    padding: 5px;
+    margin: 0 5px 0 15px ;
+}
+h3{
+    text-align: center;
+    background-color: #dd4125;
+    border-radius: 10px;
+    padding: 0px 10px;
+    font-weight: 100;
+}
+h2{
+    text-align: center;
+    background-color: #dd4125;
+    border-radius: 10px;
+    padding: 0px 10px;
+}
+ol{
+    padding: 10px;
+    background-color: #dd4125;
+    border-radius: 20px;
+    text-align: center;
+}
+.container{
+    position: relative;
+    top: 30px;
+    text-align: center;
+    font-size: 16pt;
+    display: inline-block;
+    margin: 5%;
+;
+}
+li{
+    padding:20px;
+    margin-left: 25px;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300');
+
+button[data-setter] {
+  outline: none;
+  background: transparent;
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  width: 25px;
+  height: 30px;
+  color: #edf0f1;
+  cursor: pointer;
+}
+
+.btn{
+    padding: 0;
+    margin:0;
+}
+
+button[data-setter]:hover { opacity: 0.5; }
+
+.containerr {
+    position: relative;
+    bottom: 20px;
+    width: 300px;
+    margin: auto;
+    background-color:  #dd4125;
+    border-radius: 200px;
+    display: inline-block;
+    margin: 5%;
+}
+
+.setters {
+    position: absolute;
+    left: 85px;
+    top: 75px;
+  }
+
+  .minutes-set {
+    float: left;
+    margin-right: 28px;
+  }
+
+.seconds-set { float: right;}
+
+.controlls {
+  position: absolute;
+  right: 65px;
+  top: 105px;
+  text-align: center;
+}
+
+.display-remain-time {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 100;
+  font-size: 65px;
+  color: #edf0f1;;
+}
+
+#pause {
+  outline: none;
+  background: transparent;
+  border: none;
+  margin-top: 10px;
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+
+.play::before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 22px solid #edf0f1;
+}
+
+.pause::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  width: 15px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 1px;
+  border: 5px solid #edf0f1;
+  border-top: none;
+  border-bottom: none;
+}
+
+#pause:hover { opacity: 0.8; }
+
+.e-c-base {
+  fill: none;
+  stroke: #B6B6B6;
+  stroke-width: 4px
+}
+
+.e-c-progress {
+  fill: none;
+  stroke: #edf0f1;
+  stroke-width: 4px;
+  transition: stroke-dashoffset 0.7s;
+}
+
+.e-c-pointer {
+  fill: #FFF;
+  stroke: #edf0f1;
+  stroke-width: 2px;
+}
+
+#e-pointer { transition: transform 0.7s; }
+h1 { margin-top:150px; text-align:center;}
+
