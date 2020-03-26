@@ -138,6 +138,8 @@ def add_sets_data(request,workout_id,exercise_id):
         post_weight = request.POST[f'{i.id}_weight']
         post_reps = request.POST[f'{i.id}_reps']
         if post_weight == "" or post_weight == "0" or post_reps == "" or post_reps == "0":
+            i.weight = 0
+            i.reps = 0
             errors={"confirm": "ask user"}
             return redirect(f'/exercise/{this_workout.id}/{this_exercise.id}')
         else:

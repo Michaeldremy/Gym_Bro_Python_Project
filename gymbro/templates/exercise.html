@@ -6,6 +6,7 @@
         <title>Document</title>
         {% load static %}
         <link rel="stylesheet" href="{% static '/css/nav_bar.css' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </head>
 <body>
     <header>
@@ -23,26 +24,26 @@
         <ol>
         <p>{{this_exercise.name}}</p>
         <p>Goal {{this_exercise.sets.count}} sets x {{this_exercise.goalrep}} reps each</p>
-        <form action="/add_sets_data/{{this_workout.id}}/{{this_exercise.id}}" method="POST">
+        <form id="SetForm" action="/add_sets_data/{{this_workout.id}}/{{this_exercise.id}}" method="POST">
             {% csrf_token %}
             {% for i in exercise_sets %}
                 <li>
                     <label for="{{i.id}}_weight">weight:</label>
-                    <input style="width: 5%; margin:0.5em;" type="number" name="{{i.id}}_weight" min="0" value="0">lbs
+                    <input style="width: 5%; margin:0.5em;" type="number" name="{{i.id}}_weight" min="0">lbs
                     <label for="{{i.id}}_reps">x</label>
-                    <input style="width: 5%; margin:0.5em;" type="number" name="{{i.id}}_reps" min="0" value="0">reps
+                    <input style="width: 5%; margin:0.5em;" type="number" name="{{i.id}}_reps" min="0">reps
                 </li>
             {% endfor %}
             <button type="submit">Submit</button>
         </form>
         </ol>
     </div>
-
-    {% if errors %}
     
-        Hey! There's an error!
-
-    {% endif %}
+    <script>
+        $("#SetForm").on('submit', function(event) {
+            alert("Set Data Added!");
+        })
+    </script>
 
 
     for info in exercises 
