@@ -18,7 +18,7 @@
 <body>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="create_user" method="POST">
+            <form action="create_user" id="register" method="POST">
                 {% csrf_token %}
                 <h1>Create Account</h1>
                 <!-- <div class="social-container"> we don't have this functionality yet
@@ -27,14 +27,17 @@
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div> 
                 <span>or use your email for registration</span>-->
-                <div style="padding: 0px; justify-content: space-between;">
-                    <input name="form_first_name" type="text" style="width: 10em; margin-left: 0px;" placeholder="First Name"/>
-                    <input name="form_last_name" type="text" style="width: 10em;" placeholder="Last Name"/>
+                <div style="padding-left: 1px; width: 100%; justify-content: space-between;">
+                    <div id="error"></div>
+                    <input id="form_first_name" name="form_first_name" type="text" style="width: 49%; margin-left: 0px;" required placeholder="First Name"/>
+                    <input id="form_last_name" name="form_last_name" type="text" style="width: 49%;" required placeholder="Last Name"/>
                 </div>
-                <input name="form_email" type="email" placeholder="Email"/>
-                <input name="form_weight" type="number" placeholder="Weight lbs"/>
-                <input name="form_password" type="password" placeholder="Password"/>
-                <input name="form_confirm" type="password" placeholder="Confirm Password"/>
+                <input name="form_email" type="email"  required placeholder="Email"/>
+                <input name="form_weight" type="number" required placeholder="Weight lbs"/>
+                <div style="padding-left: 1px; justify-content: space-between;">
+                <input id="form_password" name="form_password" type="password" style="width: 49.25%; margin-left: 0px;" required placeholder="Password"/>
+                <input id="form_confirm" name="form_confirm" type="password" style="width: 49.25%;" required placeholder="Confirm Password"/>
+                </div>
                 <button>Sign Up</button>
             </form>
         </div>
@@ -48,10 +51,24 @@
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <span>or use your account</span> -->
-                <input name="form_email" type="email" placeholder="Email" />
-                <input name="form_password" type="password" placeholder="Password" />
+                {% if messages %}
+                {% for message in messages %}
+                {% if message.extra_tags == "form_email" %}
+                <h6>{{message}}</h6>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% if messages %}
+                {% for message in messages %}
+                {% if message.extra_tags == "form_password" %}
+                <h6>{{message}}</h6>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                <input name="form_email" type="email" required placeholder="Email" />
+                <input name="form_password" type="password" required placeholder="Password" />
                 <a href="#">Forgot your password?</a>
-                <button>Sign In</button>
+                <button type="submit">Sign In</button>
             </form>
         </div>
         <div class="overlay-container">

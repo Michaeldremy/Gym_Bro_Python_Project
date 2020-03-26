@@ -21,6 +21,11 @@ h1 {
     margin: 0;
 }
 
+h6 {
+    margin: 0;
+    padding: 0;
+}
+
 p {
     font-size: 14px;
     font-weight: 100;
@@ -38,6 +43,24 @@ a {
     font-size: 14px;
     text-decoration: none;
     margin: 15px 0;
+}
+
+h6 {
+    margin: 0;
+    padding: 0;
+    color: #ff4b2b;
+    -webkit-text-stroke-width: .10px;
+    -webkit-text-stroke-color: black;
+    font-size: 14px;
+    padding-top: 10px;
+    margin-bottom: 2px;
+}
+
+#error {
+    color: #ff4b2b;
+    -webkit-text-stroke-width: .10px;
+    -webkit-text-stroke-color: black;
+    font-size: 14px;
 }
 
 .container {
@@ -82,7 +105,7 @@ a {
     border: none;
     padding: 12px 15px;
     margin: 8px 0;
-    width: 100%;
+    width: 99.25%;
 }
 
 button {
