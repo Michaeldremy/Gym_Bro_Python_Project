@@ -1,0 +1,40 @@
+*{
+    background: no-repeat;
+    background-size: cover;
+}
+header{
+    opacity: 95%; 
+}
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #edf0f1;
+}
+h2{
+    text-align: center;
+    background-color: #dd4125;
+    border-radius: 10px;
+    padding: 10px;
+}
+table{
+    padding: 10px;
+    background-color: #dd4125;
+    border-radius: 20px;
+}
+th, td{
+    padding: 20px;
+
+}
+#exercisename{
+    background-color: #ff4b2b;
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 200px;
+}
+#exercisename:hover{
+    background-color: #dd4125;
+}

@@ -13,7 +13,7 @@
         <img class="logo" src="/static/imgs/Gym_Bro_logo.png" alt="logo">
         <nav>
             <ul class="nav_links">
-                <li><a href="#">Meet the Team</a></li>
+                <li><a href="/meet_the_team">Meet the Team</a></li>
                 <li><a href="/home">Home</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
@@ -23,20 +23,17 @@
     <div class="card">
         <div class="info">
             <!-- Use Jinja to put info from our Database in the Code below -->
-            <div class="name">Michael Remy</div>
+            <div class="name">{{profile_info.first_name}} {{profile_info.last_name}}</div>
             <div class="divider"></div>
             <!-- Use Jinja to put info from our Database in the code below -->
             <!-- Character limit for validatior should be no more than 180. -->
             <div class="bio">
-                Fitness has always been at the top of my mind,
-                when I workout I felt like I acheived greatness knowing that
-                all those other people who didn't work out won't live as long
-                as I do! :)
+                {{profile_info.desc}}
             </div>
             <!-- If we want to work on adding friends between users -->
             <button id="friend_button">Add Friend</button>
-            <div id="edit"><a href="#">Edit Profile</a></div>
-        <div class="photo"></div>
+            <div id="edit"><a href="/edit_profile">Edit Profile</a></div>
+            <div class="photo" style="background: url(/static/imgs/{{profile_info.profile_picture}}); background-size: 100% 100%;"></div>
         </div>
     </div>
 </body>
