@@ -13,7 +13,7 @@
         <nav>
             <ul class="nav_links">
                 <li><a href="#">Profile</a></li>
-                <li><a href="#">Home</a></li>
+                <li><a href="/home">Home</a></li>
                 <li><a href="logout">Logout</a></li>
             </ul>
         </nav>
@@ -28,9 +28,9 @@
             {% for i in exercise_sets %}
                 <li>
                     <label for="{{i.id}}_weight">weight:</label>
-                    <input style="width: 5%; margin:0.5em;" type="number" name="{{i.id}}_weight">lbs
+                    <input style="width: 5%; margin:0.5em;" type="number" name="{{i.id}}_weight" min="0" value="0">lbs
                     <label for="{{i.id}}_reps">x</label>
-                    <input style="width: 5%; margin:0.5em;" type="number" name="{{i.id}}_reps">reps
+                    <input style="width: 5%; margin:0.5em;" type="number" name="{{i.id}}_reps" min="0" value="0">reps
                 </li>
             {% endfor %}
             <button type="submit">Submit</button>
@@ -38,10 +38,11 @@
         </ol>
     </div>
 
+    {% if errors %}
+    
+        Hey! There's an error!
 
-
-
-
+    {% endif %}
 
 
     for info in exercises 

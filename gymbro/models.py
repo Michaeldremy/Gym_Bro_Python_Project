@@ -38,7 +38,6 @@ class User(models.Model):
     email = models.CharField(max_length=30)
     weight = models.IntegerField()
     password = models.CharField(max_length=30)
-    profile_picture = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
