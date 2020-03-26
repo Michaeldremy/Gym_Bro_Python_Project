@@ -104,7 +104,7 @@ button[data-setter]:hover { opacity: 0.5; }
 
 .controlls {
   position: absolute;
-  left: 70px;
+  right: 65px;
   top: 105px;
   text-align: center;
 }
@@ -130,8 +130,8 @@ button[data-setter]:hover { opacity: 0.5; }
   display: block;
   content: "";
   position: absolute;
-  top: 8px;
-  right: 30px;
+  top: 10px;
+  left: 5px;
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
   border-left: 22px solid #edf0f1;
