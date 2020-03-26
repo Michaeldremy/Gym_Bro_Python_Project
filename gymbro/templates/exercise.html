@@ -5,9 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         {% load static %}
+        <script src='http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+        <link href="http://www.cssscript.com/wp-includes/css/sticky.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="{% static '/css/nav_bar.css' %}">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="{% static '/css/exercise.css' %}">
+        <script src="{% static '/js/day.js'%}"></script>
+
     </head>
+    <style>
+        body {
+        background-image: url("{% static '/imgs/exercise_pic.jpg' %}");
+        }
+    </style>
 <body>
     <header>
         <img class="logo" src="/static/imgs/Gym_Bro_logo.png" alt="logo">
@@ -20,53 +29,35 @@
         </nav>
         <a class="cta" href="#"><button>Workout</button></a>
     </header>
+    <main>
     <div class="container">
-        <ol>
-        <p>{{this_exercise.name}}</p>
-        <p>Goal {{this_exercise.sets.count}} sets x {{this_exercise.goalrep}} reps each</p>
-        <form id="SetForm" action="/add_sets_data/{{this_workout.id}}/{{this_exercise.id}}" method="POST">
+        <ol id="list">
+        <h2>{{this_exercise.name}}</h2>
+        <h3 id="setrep">Goal {{this_exercise.sets.count}} sets x {{this_exercise.goalrep}} reps each</h3>
+        <form action="/add_sets_data/{{this_workout.id}}/{{this_exercise.id}}" method="POST">
             {% csrf_token %}
             {% for i in exercise_sets %}
                 <li>
                     <label for="{{i.id}}_weight">weight:</label>
-                    <input style="width: 5%; margin:0.5em;" type="number" name="{{i.id}}_weight" min="0">lbs
+                    <input type="number" name="{{i.id}}_weight" min="0">lbs
                     <label for="{{i.id}}_reps">x</label>
-                    <input style="width: 5%; margin:0.5em;" type="number" name="{{i.id}}_reps" min="0">reps
+                    <input type="number" name="{{i.id}}_reps" min="0">reps
+
                 </li>
             {% endfor %}
             <button type="submit">Submit</button>
         </form>
         </ol>
     </div>
-    
-    <script>
-        $("#SetForm").on('submit', function(event) {
-            alert("Set Data Added!");
-        })
-    </script>
-
-
-    for info in exercises 
-    <h1>{{exercises.name}}</h1>
-    <form action="" method="POST">
-        {% csrf_token %}
-                <label for="info.weight"></label>
-                <input style="width: 3%;" type="number" name="info.weight">lbs
-                
-                <label for="info.rep"></label>
-                <input style="width: 3%;" type="number" name="info.rep">reps
-    </form>
-    <button onclick="timedText()">Try it</button>
-
-    <div class="container">
+    <div class="containerr">
         <div class="setters">
           <div class="minutes-set">
-            <button data-setter="minutes-plus">+</button>
-            <button data-setter="minutes-minus">-</button>
+            <button class="btn" data-setter="minutes-plus">+</button>
+            <button class="btn" data-setter="minutes-minus">-</button>
           </div>
           <div class="seconds-set">
-            <button data-setter="seconds-plus">+</button>
-            <button data-setter="seconds-minus">-</button>
+            <button class="btn" data-setter="seconds-plus">+</button>
+            <button class="btn" data-setter="seconds-minus">-</button>
           </div>
         </div>
         <div class="circle"> <svg width="300" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
@@ -85,6 +76,6 @@
           <button class="play" id="pause"></button>
         </div>
       </div>
-    
+    </main>
 </body>
 </html>
