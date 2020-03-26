@@ -32,7 +32,12 @@ def show_exercise(request,workout_id, exercise_id):
     return render(request,'exercise.html',context)
 
 def show_the_team(request):
-    return render(request,'our_team.html')
+    today = date.today()
+    today_wkout = Workout.objects.get(weekday=today.strftime("%A"))
+    context = {
+        "today_wkout_id": today_wkout.id
+    }
+    return render(request,'our_team.html', context)
 
 def show_data_visualization(request,link_id):
     print("I am here",link_id)     
@@ -78,9 +83,12 @@ def show_data_visualization(request,link_id):
 
 
 def show_myprofile(request):
+    today = date.today()
+    today_wkout = Workout.objects.get(weekday=today.strftime("%A"))
     context = {
         'profile_info': User.objects.get(id=request.session['user_id']),
-        'myexercises': Exercise.objects.all()      
+        'myexercises': Exercise.objects.all(), 
+        "today_wkout_id": today_wkout.id
     }
     return render(request,'myprofile.html', context)    
 
