@@ -3,6 +3,8 @@ from django.contrib import messages
 import bcrypt
 from .models import *
 from chartit import DataPool, Chart, PivotDataPool, PivotChart
+from datetime import date
+import calendar
 
 # Renders
 
@@ -10,8 +12,11 @@ def Reg_and_Login_index(request):
     return render(request, 'LogReg.html')
 
 def dashboard(request):
+    today = date.today()
+    today_wkout = Workout.objects.get(weekday=today.strftime("%A"))
     context = {
-        "all_workouts": Workout.objects.all()
+        "all_workouts": Workout.objects.all(),
+        "today_wkout_id": today_wkout.id
     }
     return render(request,'dashboard.html',context) 
 
@@ -53,11 +58,18 @@ def edit_profile(request):
     return render(request, 'edit_myprofile.html' , context)
 
 def show_workout(request,workout_id):
+    this_user = User.objects.get(id=request.session['user_id'])
     this_workout=Workout.objects.get(id=workout_id)
+    user_stats = Stat.objects.filter(user=this_user).filter(date=date.today())
+    all_exercises = Exercise.objects.filter(workout=this_workout)
+
+    for stat in user_stats:
+        all_exercises = all_exercises.exclude(id=stat.exercise.id)
+
     context={
-        'workouts': this_workout,
-        'sets': Set.objects.all(),
-        'exercises':Exercise.objects.filter(workout=this_workout)
+        'workout': this_workout,
+        'user_stats': user_stats,
+        'exercises': all_exercises
     }
     return render(request,'day.html',context)
 
@@ -139,7 +151,7 @@ def add_sets_data(request,workout_id,exercise_id):
     except:
         compute_avg = 0    
     newStat = Stat.objects.create(user=this_user,exercise=this_exercise,lbs_rep=compute_avg)    
-    return HttpResponse("Added") ## need to redirect to /workout/workout_id
+    return redirect(f'/workout/{this_workout.id}')
 def logout(request):
     request.session.flush()
     return redirect('/')
