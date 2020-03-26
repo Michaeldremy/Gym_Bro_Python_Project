@@ -22,8 +22,8 @@
         <img class="logo" src="/static/imgs/Gym_Bro_logo.png" alt="logo">
         <nav>
             <ul class="nav_links">
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Home</a></li>
+                <li><a href="/myprofile">Profile</a></li>
+                <li><a href="/home">Home</a></li>
                 <li><a href="logout">Logout</a></li>
             </ul>
         </nav>
@@ -39,16 +39,16 @@
             {% for i in exercise_sets %}
                 <li>
                     <label for="{{i.id}}_weight">weight:</label>
-                    <input  type="number" name="{{i.id}}_weight">lbs x
-                    <label for="{{i.id}}_reps"></label>
-                    <input  type="number" name="{{i.id}}_reps">reps
+                    <input type="number" name="{{i.id}}_weight" min="0">lbs
+                    <label for="{{i.id}}_reps">x</label>
+                    <input type="number" name="{{i.id}}_reps" min="0">reps
+
                 </li>
             {% endfor %}
             <button type="submit">Submit</button>
         </form>
         </ol>
     </div>
-
     <div class="containerr">
         <div class="setters">
           <div class="minutes-set">
