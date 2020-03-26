@@ -26,6 +26,7 @@ def show_exercise(request,workout_id, exercise_id):
         "this_exercise": this_exercise,
         "exercise_sets": Set.objects.filter(exercise=this_exercise)
     }
+    request.session['restt']=this_exercise.rest
     return render(request,'exercise.html',context)
 
 def show_the_team(request):
