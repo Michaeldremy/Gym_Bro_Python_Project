@@ -20,8 +20,7 @@ const setterBtns = document.querySelectorAll('button[data-setter]');
 
 let intervalTimer;
 let timeLeft;
-let wholeTime = document.getElementById('rester').value;
-console.log(wholeTime);
+let wholeTime = +document.getElementById('rester').value;
 let isPaused = false;
 let isStarted = false;
 
