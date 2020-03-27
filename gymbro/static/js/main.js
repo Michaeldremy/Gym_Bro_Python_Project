@@ -19,7 +19,7 @@ form.addEventListener('submit', (e) => {
 		messages.push('Last name should be at least 2 characters')
 }
 
-	if (password.value.length < 5){
+	if (password.value.length < 5) {
 		messages.push('Password should be atleast 5 characters')
 	}
 
