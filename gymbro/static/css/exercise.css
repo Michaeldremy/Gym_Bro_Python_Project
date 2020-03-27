@@ -24,14 +24,14 @@ input{
 }
 h3{
     text-align: center;
-    background-color: #dd4125;
+    /* background-color: #dd4125; */
     border-radius: 10px;
-    padding: 0px 10px;
+    padding: 10px;
     font-weight: 100;
 }
 h2{
     text-align: center;
-    background-color: #dd4125;
+    /* background-color: #dd4125; */
     border-radius: 10px;
     padding: 0px 10px;
 }
@@ -42,9 +42,17 @@ ol{
     text-align: center;
 }
 .container{
+<<<<<<< HEAD
     position: absolute;
     top: 20%;
     right: 50%;
+=======
+    background-color: #dd4125;
+    padding:1em;
+    border-radius: 20px;
+    position: relative;
+    top: 30px;
+>>>>>>> 656bd150ab6662b028956e8534a814b7adf7b9e6
     text-align: center;
     font-size: 16pt;
     display: inline-block;

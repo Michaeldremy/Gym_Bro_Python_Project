@@ -11,6 +11,7 @@ urlpatterns = [
     # Not sure what the ↑ line or ↓ line do. They both point to views.show_exercise
     path('meet_the_team', views.show_the_team),
     path('myprofile', views.show_myprofile),
+    path('myprofile/<int:link_id>', views.show_data_visualization),
     path('edit_profile', views.edit_profile),
     path('create_user', views.create_user),
     path('login', views.login),
