@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 import re
+import bcrypt
 
 class UserManager(models.Manager):
     def user_validator(self, postData):
@@ -10,18 +11,18 @@ class UserManager(models.Manager):
             errors['email_taken'] = "An account with this email already exists"
             # First Name
         if len(postData['form_first_name']) == 0:
-            errors['blank_first_name'] = "First name is required."
+            errors['blank_name'] = "First name and last name is required."
         elif len(postData['form_first_name']) < 2:
-            errors["name_length"] = "First name should be at least 2 characters"
+            errors["name_length"] = "First name and last name should be at least 2 characters"
         elif not postData['form_first_name'].isalpha():
-            errors['letters_only_first_name'] = "First name can only contain letters"
+            errors['letter_only_name'] = "First name and last name can only contain letters"
             # Last Name
         if len(postData['form_last_name']) == 0:
-            errors['blank_last_name'] = "Last name is required."
+            errors['blank_name'] = "First name and last name is required."
         elif len(postData['form_last_name']) < 2:
             errors["name_length"] = "Last name should be at least 2 characters"
         elif not postData['form_last_name'].isalpha():
-            errors['letters_only_last_name'] = "Last name can only contain letters"
+            errors['letter_only_name'] = "Last name can only contain letters"
             # Email Regex Check
         email_regex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if not email_regex.match(postData['form_email']):
@@ -37,6 +38,14 @@ class UserManager(models.Manager):
 
     def login_validator(self, postData):
         errors = {}
+        # Checks if email is in our database and checks if password is in our database. If it matches we let them log in.
+        email = User.objects.filter(email=postData['form_email'])
+        if len(email) == 0:
+            errors['form_email'] = "Your email or password is invalid."
+        else:
+            if not bcrypt.checkpw(postData['form_password'].encode(), email[0].password.encode()):
+                errors['form_password'] = "Your email or password is invalid."
+
         email_regex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if len(postData['form_email']) < 3:
             errors["invalid_email"] = "Not a valid email"
