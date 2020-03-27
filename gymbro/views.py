@@ -23,10 +23,11 @@ def dashboard(request):
 def show_exercise(request,workout_id, exercise_id):
     this_workout = Workout.objects.get(id=workout_id)
     this_exercise = Exercise.objects.get(id=exercise_id)
+    exercise_sets = Set.objects.filter(exercise=this_exercise)
     context = {
         "this_workout": this_workout,
         "this_exercise": this_exercise,
-        "exercise_sets": Set.objects.filter(exercise=this_exercise)
+        "exercise_sets": exercise_sets
     }
     request.session['restt']=this_exercise.rest
     return render(request,'exercise.html',context)
@@ -115,16 +116,17 @@ def show_workout(request,workout_id):
     this_workout=Workout.objects.get(id=workout_id)
     user_stats = Stat.objects.filter(user=this_user).filter(date=date.today())
     all_exercises = Exercise.objects.filter(workout=this_workout)
-
     for stat in user_stats:
         all_exercises = all_exercises.exclude(id=stat.exercise.id)
-
     context={
         'workout': this_workout,
         'user_stats': user_stats,
         'exercises': all_exercises
     }
-    return render(request,'day.html',context)
+    if this_workout.category == "WeightTrain":
+        return render(request,'weight_train.html',context)
+    else:
+        return render(request,'cardio.html',context)
 
 def exercise(request):
     return render(request,'exercise.html')
@@ -182,18 +184,25 @@ def add_sets_data(request,workout_id,exercise_id):
     exercise_sets = Set.objects.filter(exercise=this_exercise)
     sum_weight = 0
     sum_reps = 0
+    errors = ""
     for i in exercise_sets:
         post_weight = request.POST[f'{i.id}_weight']
         post_reps = request.POST[f'{i.id}_reps']
-        if post_weight == "" or post_weight == "0" or post_reps == "" or post_reps == "0":
-            errors={"confirm": "ask user"}
-            return redirect(f'/exercise/{this_workout.id}/{this_exercise.id}')
+        request.session[f'{i.id}_weight'] = post_weight
+        request.session[f'{i.id}_reps'] = post_reps
+        if post_weight == "" or post_reps == "":
+            i.weight = 0
+            i.reps = 0
+            errors = "FINISH YOUR REPS LOSER"
         else:
             i.weight = post_weight
             i.reps = post_reps
         i.save()
         sum_weight += int(i.weight)*int(i.reps)
         sum_reps += int(i.reps)
+    if len(errors)>0:
+        messages.error(request, errors)
+        return redirect(f'/exercise/{this_workout.id}/{this_exercise.id}')
     try:    
         compute_avg = sum_weight/sum_reps
     except:

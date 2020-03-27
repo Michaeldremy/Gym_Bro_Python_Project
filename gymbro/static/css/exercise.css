@@ -24,14 +24,14 @@ input{
 }
 h3{
     text-align: center;
-    background-color: #dd4125;
+    /* background-color: #dd4125; */
     border-radius: 10px;
-    padding: 0px 10px;
+    padding: 10px;
     font-weight: 100;
 }
 h2{
     text-align: center;
-    background-color: #dd4125;
+    /* background-color: #dd4125; */
     border-radius: 10px;
     padding: 0px 10px;
 }
@@ -42,6 +42,9 @@ ol{
     text-align: center;
 }
 .container{
+    background-color: #dd4125;
+    padding:1em;
+    border-radius: 20px;
     position: relative;
     top: 30px;
     text-align: center;
