@@ -85,6 +85,8 @@ class Workout(models.Model):
     name = models.CharField(max_length=45)
     weekday = models.CharField(max_length=15)
     users = models.ManyToManyField(User, related_name="workouts")
+    category = models.CharField(max_length=45)
+    desc = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -109,4 +111,4 @@ class Stat(models.Model):
     lbs_rep = models.IntegerField()
     date = models.DateField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)    
