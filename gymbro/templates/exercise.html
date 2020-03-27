@@ -31,6 +31,13 @@
     </header>
     <main>
     <div class="container">
+<<<<<<< HEAD
+        <ol id="list">
+        <h2>{{this_exercise.name}}</h2>
+        <h3 id="setrep">Goal {{this_exercise.sets.count}} sets x {{this_exercise.goalrep}} reps each</h3>
+        <input type="hidden" id="rester" value="{{this_exercise.rest}}">
+        <form action="/add_sets_data/{{this_workout.id}}/{{this_exercise.id}}" method="POST">
+=======
       <h2>{{this_exercise.name}}</h2>
       <h3 id="setrep">Goal {{this_exercise.sets.count}} sets x {{this_exercise.goalrep}} reps each</h3>
       
@@ -40,6 +47,7 @@
           {% for message in messages %}
           <ol id="list">
           <form action="/add_sets_data/{{this_workout.id}}/{{this_exercise.id}}" method="POST">
+>>>>>>> 656bd150ab6662b028956e8534a814b7adf7b9e6
             {% csrf_token %}
             {% for i in exercise_sets %}
             <li>
@@ -73,6 +81,7 @@
         </ol>
         {% endif %}
     </div>
+    <div class="timer"><h2>Rest Timer</h2></div>
     <div class="containerr">
         <div class="setters">
           <div class="minutes-set">
