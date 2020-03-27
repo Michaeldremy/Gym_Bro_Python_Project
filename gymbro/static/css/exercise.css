@@ -42,7 +42,9 @@ ol{
     text-align: center;
 }
 .container{
+
     background-color: #dd4125;
+
     position: absolute;
     top: 20%;
     right: 50%;

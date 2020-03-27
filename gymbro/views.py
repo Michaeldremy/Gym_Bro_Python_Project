@@ -16,7 +16,8 @@ def dashboard(request):
     today_wkout = Workout.objects.get(weekday=today.strftime("%A"))
     context = {
         "all_workouts": Workout.objects.all(),
-        "today_wkout_id": today_wkout.id
+        "today_wkout_id": today_wkout.id,
+
     }
     return render(request,'dashboard.html',context) 
 
@@ -115,13 +116,15 @@ def show_workout(request,workout_id):
     this_user = User.objects.get(id=request.session['user_id'])
     this_workout=Workout.objects.get(id=workout_id)
     user_stats = Stat.objects.filter(user=this_user).filter(date=date.today())
+    one_exercise = Exercise.objects.filter(id=1)
     all_exercises = Exercise.objects.filter(workout=this_workout)
     for stat in user_stats:
         all_exercises = all_exercises.exclude(id=stat.exercise.id)
     context={
         'workout': this_workout,
         'user_stats': user_stats,
-        'exercises': all_exercises
+        'exercises': all_exercises,
+        'exercise': one_exercise
     }
     if this_workout.category == "WeightTrain":
         return render(request,'weight_train.html',context)
@@ -219,7 +222,7 @@ def cardio(request,workout_id):
     this_workout=Workout.objects.get(id=workout_id)
     user_stats = Stat.objects.filter(user=this_user).filter(date=date.today())
     all_exercises = Exercise.objects.filter(workout=this_workout)
-    one_exercise = Exercise.objects.filter(id=1)
+   
 
     for stat in user_stats:
         all_exercises = all_exercises.exclude(id=stat.exercise.id)
@@ -228,6 +231,6 @@ def cardio(request,workout_id):
         'workout': this_workout,
         'user_stats': user_stats,
         'exercises': all_exercises,
-        'exercise': one_exercise
+        
     }
     return render(request,'cardio.html',context)

@@ -26,7 +26,7 @@ main{
     border-radius: 20px;
     padding: 10px;
     margin: 20px;
-    max-width: 273px;
+    max-width: 293px;
 }
 h2{
     text-align: center;
@@ -34,10 +34,11 @@ h2{
     padding: 5px;
 }
 table{
-    padding: 10px;
+    padding: 20px;
     background-color: #dd4125;
     border-radius: 20px;
     margin: 20px;
+    text-align: center;
 }
  
 td{
