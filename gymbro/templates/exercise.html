@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        {% load static %}
-        <script src='http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
-        <link href="http://www.cssscript.com/wp-includes/css/sticky.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="{% static '/css/nav_bar.css' %}">
-        <link rel="stylesheet" href="{% static '/css/exercise.css' %}">
-        <script src="{% static '/js/day.js'%}"></script>
-
-    </head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <link href="http://www.cssscript.com/wp-includes/css/sticky.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static '/css/nav_bar.css' %}">
+    <link rel="stylesheet" href="{% static '/css/exercise.css' %}">
+    <script src="{% static '/js/day.js'%}"></script>
+</head>
     <style>
         body {
         background-image: url("{% static '/imgs/exercise_pic.jpg' %}");
@@ -30,6 +29,7 @@
         <a class="cta" href="/workout/{{this_workout.id}}"><button>Back to Workout</button></a>
     </header>
     <main>
+      <input type="hidden" id="rester" value="{{this_exercise.rest}}">
     <div class="container">
       <h2>{{this_exercise.name}}</h2>
       <h3 id="setrep">Goal {{this_exercise.sets.count}} sets x {{this_exercise.goalrep}} reps each</h3>
