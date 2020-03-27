@@ -7,6 +7,7 @@
     <title>Profile Page</title>
     <link rel="stylesheet" href="{% static '/css/nav_bar.css' %}">
     <link rel="stylesheet" href="{% static '/css/ProfilePage.css' %}">
+    <link rel="stylesheet" href="{% static '/css/statGraph.css' %}">
     <!-- char_it -->
     <script
     src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -21,71 +22,6 @@
     {% load chartit %}
     <!-- Nav bar -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        
-        .navbar {
-            overflow: hidden;
-            background-color: #333;
-        }
-        
-        .navbar a {
-            float: left;
-            font-size: 16px;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-        
-        .dropdown {
-            float: left;
-            overflow: hidden;
-        }
-        
-        .dropdown .dropbtn {
-            font-size: 16px;  
-            border: none;
-            outline: none;
-            color: white;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-        }
-        
-        .navbar a:hover, .dropdown:hover .dropbtn {
-            background-color: red;
-        }
-        
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-        
-        .dropdown-content a {
-            float: none;
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-        
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-        
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        </style>
 </head>
 <body>
     <header>
@@ -115,7 +51,7 @@
             <div class="photo" style="background: url(/static/imgs/{{profile_info.profile_picture}}); background-size: 100% 100%;"></div>
         </div>
     </div>
-    <div style="position: absolute; top: 235px; left:600px; min-width: 900px;">
+    <div style="position: absolute; top: 235px; left:600px; min-width: 900px; padding-top: 3.5%;">
         <div class="navbar">
             <a href="#home">Select Exercise</a>
             <div class="dropdown">
@@ -130,7 +66,7 @@
             </div> 
         </div>
         {% if chart_list %}
-        <div id='cht' style="min-width: 310px; height: 400px; max-width: 900px; margin: 0 auto">{{ chart_list|load_charts:"cht" }}</div>
+        <div id='cht' style="min-width: 310px; height: 400px; max-width: 900px; margin: 0 auto;">{{ chart_list|load_charts:"cht" }}</div>
         {% endif %} 
     </div>  
 </body>
