@@ -42,6 +42,8 @@ def show_the_team(request):
     return render(request,'our_team.html', context)
 
 def show_data_visualization(request,link_id):
+    this_user= User.objects.get(id=request.session['user_id'])
+    my_stats = Stat.objects.filter(user=this_user)
     print("I am here",link_id)     
     if link_id != None:
         plotdata = \
@@ -72,13 +74,16 @@ def show_data_visualization(request,link_id):
         context = {
             'profile_info': User.objects.get(id=request.session['user_id']),
             'chart_list': [cht],
-            'myexercises': Exercise.objects.all() 
+            'allexercises': Exercise.objects.all(),
+            'mystats': my_stats 
         }
         return render(request,'myprofile.html', context) 
     else:
         context = {
             'profile_info': User.objects.get(id=request.session['user_id']), 
-            'myexercises': Exercise.objects.all()    
+            'allexercises': Exercise.objects.all(),
+            'mystats': my_stats 
+    
         }
         return render(request,'myprofile.html', context)  
 
@@ -87,10 +92,14 @@ def show_data_visualization(request,link_id):
 def show_myprofile(request):
     today = date.today()
     today_wkout = Workout.objects.get(weekday=today.strftime("%A"))
+    this_user= User.objects.get(id=request.session['user_id'])
+    my_stats = Stat.objects.filter(user=this_user)
+
     context = {
         'profile_info': User.objects.get(id=request.session['user_id']),
-        'myexercises': Exercise.objects.all(), 
-        "today_wkout_id": today_wkout.id
+        'allexercises': Exercise.objects.all(), 
+        "today_wkout_id": today_wkout.id,
+        'mystats': my_stats 
     }
     return render(request,'myprofile.html', context)    
 
