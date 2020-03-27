@@ -70,7 +70,8 @@ def show_data_visualization(request,link_id):
                         'text': 'Date'}},
                 'YAxis': {
                         'title': {
-                        'text': 'Average Pounds'}}})
+                        'text': 'Avg'}}
+                })
         context = {
             'profile_info': User.objects.get(id=request.session['user_id']),
             'chart_list': [cht],
