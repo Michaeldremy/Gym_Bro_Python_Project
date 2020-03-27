@@ -109,12 +109,12 @@ button[data-setter]:hover { opacity: 0.5; }
 
 .controlls {
   position: absolute;
-  right: 65px;
-  top: 105px;
+  right: 15px;
+  top: 90px;
   text-align: center;
 }
 
-#display-remain-time {
+footer {
   font-family: "Montserrat", sans-serif;
   font-weight: 100;
   font-size: 65px;
