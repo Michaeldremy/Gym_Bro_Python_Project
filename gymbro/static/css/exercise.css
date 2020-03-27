@@ -42,6 +42,9 @@ ol{
     text-align: center;
 }
 .container{
+
+    background-color: #dd4125;
+
     position: absolute;
     top: 20%;
     right: 50%;
@@ -49,7 +52,8 @@ ol{
     font-size: 16pt;
     display: inline-block;
     margin: 5%;
-;
+    border-radius: 20px;
+    padding: 1em;
 }
 li{
     padding:20px;
@@ -59,7 +63,7 @@ li{
 .timer{
   position: absolute;
   top: 20%;
-  left: 53%;
+  left: 52%;
   text-align: center;
   font-size: 16pt;
   display: inline-block;
