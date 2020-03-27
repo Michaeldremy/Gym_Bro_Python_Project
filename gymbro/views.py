@@ -43,8 +43,15 @@ def show_the_team(request):
 
 def show_data_visualization(request,link_id):
     this_user= User.objects.get(id=request.session['user_id'])
-    my_stats = Stat.objects.filter(user=this_user)
-    print("I am here",link_id)     
+    all_my_stats = Stat.objects.filter(user=this_user)
+
+    my_stats = []
+    unique = []
+    for stat in all_my_stats:
+        if stat.exercise.name not in unique:
+            unique.append(stat.exercise.name)
+            my_stats.append(stat)
+  
     if link_id != None:
         plotdata = \
         DataPool(
@@ -76,15 +83,14 @@ def show_data_visualization(request,link_id):
             'profile_info': User.objects.get(id=request.session['user_id']),
             'chart_list': [cht],
             'allexercises': Exercise.objects.all(),
-            'mystats': my_stats 
+            'mystats': my_stats
         }
         return render(request,'myprofile.html', context) 
     else:
         context = {
             'profile_info': User.objects.get(id=request.session['user_id']), 
             'allexercises': Exercise.objects.all(),
-            'mystats': my_stats 
-    
+            'mystats': my_stats
         }
         return render(request,'myprofile.html', context)  
 
@@ -93,14 +99,22 @@ def show_data_visualization(request,link_id):
 def show_myprofile(request):
     today = date.today()
     today_wkout = Workout.objects.get(weekday=today.strftime("%A"))
+
     this_user= User.objects.get(id=request.session['user_id'])
-    my_stats = Stat.objects.filter(user=this_user)
+    all_my_stats = Stat.objects.filter(user=this_user)
+
+    my_stats = []
+    unique = []
+    for stat in all_my_stats:
+        if stat.exercise.name not in unique:
+            unique.append(stat.exercise.name)
+            my_stats.append(stat)
 
     context = {
         'profile_info': User.objects.get(id=request.session['user_id']),
         'allexercises': Exercise.objects.all(), 
         "today_wkout_id": today_wkout.id,
-        'mystats': my_stats 
+        'mystats': my_stats
     }
     return render(request,'myprofile.html', context)    
 
@@ -125,9 +139,19 @@ def edit_profile(request):
 def show_workout(request,workout_id):
     this_user = User.objects.get(id=request.session['user_id'])
     this_workout=Workout.objects.get(id=workout_id)
-    user_stats = Stat.objects.filter(user=this_user).filter(date=date.today())
+    user_stats1 = Stat.objects.filter(user=this_user)
+    user_stats = user_stats1.filter(date=date.today())
     one_exercise = Exercise.objects.filter(id=1)
     all_exercises = Exercise.objects.filter(workout=this_workout)
+    # user_stats2 = user_stats1.filter(date=date.today())
+    # user_stats = []
+    # unique = []
+    # for stat in user_stats2:
+    #     if stat.exercise.name not in unique:
+    #         unique.append(stat.exercise.name)
+    #         user_stats.append(stat)
+    # for i in user_stats:
+    #     print(i.date)
     for stat in user_stats:
         all_exercises = all_exercises.exclude(id=stat.exercise.id)
     context={
@@ -140,6 +164,7 @@ def show_workout(request,workout_id):
         return render(request,'weight_train.html',context)
     else:
         return render(request,'cardio.html',context)
+
 
 def exercise(request):
     return render(request,'exercise.html')
