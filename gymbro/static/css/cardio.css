@@ -1,74 +1,63 @@
 *{
     background: no-repeat;
     background-size: cover;
-    margin: 0;
-    padding:0;
 }
 header{
-    opacity: 95%; 
+    opacity: 95%;
+} 
+.container{
+    position: absolute;
+    top: 10%;
+    right: 50%;
 }
 
 main{
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
     font-size: 16px;
     color: #edf0f1;
 }
-input{
-    width: 50px;
-    border-style: hidden;
-    background-color: #edf0f1;
-    padding: 5px;
-    margin: 0 5px 0 15px ;
-}
-h3{
+.topbar{
     text-align: center;
     background-color: #dd4125;
-    border-radius: 10px;
-    padding: 0px 10px;
-    font-weight: 100;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 20px;
+    max-width: 273px;
 }
 h2{
     text-align: center;
     background-color: #dd4125;
-    border-radius: 10px;
-    padding: 0px 10px;
+    padding: 5px;
 }
-ol{
+table{
     padding: 10px;
     background-color: #dd4125;
     border-radius: 20px;
-    text-align: center;
+    margin: 20px;
 }
-.container{
-    position: absolute;
-    top: 20%;
-    right: 50%;
-    text-align: center;
-    font-size: 16pt;
-    display: inline-block;
-    margin: 5%;
-;
-}
-li{
-    padding:20px;
-    margin-left: 25px;
-}
+ 
+td{
+    padding: 20px;
 
-.timer{
+}
+#timer{
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
   position: absolute;
-  top: 20%;
-  left: 53%;
-  text-align: center;
-  font-size: 16pt;
-  display: inline-block;
+  top: 17%;
+  left: 50.5%;
+  font: 72pt;
+  padding: 0 10px;
   margin: 5%;
-  padding: 10px;
+  display: inline-block;
   background-color: #dd4125;
   border-radius: 10px;
+  width: 265px;
 }
-
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300');
 
@@ -94,7 +83,7 @@ button[data-setter]:hover { opacity: 0.5; }
 
 .containerr {
     position: absolute;
-    top: 30%;
+    top: 30.5%;
     left: 50%;
     width: 300px;
     margin: auto;
@@ -124,7 +113,7 @@ button[data-setter]:hover { opacity: 0.5; }
   text-align: center;
 }
 
-.display-remain-time {
+#display-remain-time {
   font-family: "Montserrat", sans-serif;
   font-weight: 100;
   font-size: 65px;

@@ -92,7 +92,7 @@ class Exercise(models.Model):
     name = models.CharField(max_length=45)
     workout = models.ManyToManyField(Workout, related_name="exercises")
     goalrep = models.IntegerField(default=8)
-    rest = models.IntegerField(default=90)
+    rest = models.IntegerField(default=60)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

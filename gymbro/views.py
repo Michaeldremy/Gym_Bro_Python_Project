@@ -23,6 +23,7 @@ def dashboard(request):
 def show_exercise(request,workout_id, exercise_id):
     this_workout = Workout.objects.get(id=workout_id)
     this_exercise = Exercise.objects.get(id=exercise_id)
+    request.session['rester']=this_exercise.rest
     context = {
         "this_workout": this_workout,
         "this_exercise": this_exercise,
@@ -156,3 +157,21 @@ def add_sets_data(request,workout_id,exercise_id):
 def logout(request):
     request.session.flush()
     return redirect('/')
+
+def cardio(request,workout_id):
+    this_user = User.objects.get(id=request.session['user_id'])
+    this_workout=Workout.objects.get(id=workout_id)
+    user_stats = Stat.objects.filter(user=this_user).filter(date=date.today())
+    all_exercises = Exercise.objects.filter(workout=this_workout)
+    one_exercise = Exercise.objects.filter(id=1)
+
+    for stat in user_stats:
+        all_exercises = all_exercises.exclude(id=stat.exercise.id)
+
+    context={
+        'workout': this_workout,
+        'user_stats': user_stats,
+        'exercises': all_exercises,
+        'exercise': one_exercise
+    }
+    return render(request,'cardio.html',context)
