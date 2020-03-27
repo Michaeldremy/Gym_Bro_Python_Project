@@ -11,12 +11,12 @@ const errorElement = document.getElementById('error')
 
 form.addEventListener('submit', (e) => {
 	let messages = []
-	if (first_name.value.length < 3) {
-		messages.push('First name should be at least 3 characters')
+	if (first_name.value.length < 2) {
+		messages.push('First name should be at least 2 characters')
 }
 
-	if (last_name.value.length < 3) {
-		messages.push('Last name should be at least 3 characters')
+	if (last_name.value.length < 2) {
+		messages.push('Last name should be at least 2 characters')
 }
 
 	if (password.value.length < 5){
