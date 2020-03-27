@@ -59,8 +59,8 @@
                 <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content">
-                    {% for excercise in myexercises %}
-                    <a href="/myprofile/{{excercise.id}}">{{excercise.name}}</a>
+                    {% for i in mystats %}
+                    <a href="/myprofile/{{i.exercise.id}}">{{i.exercise.name}}</a>
                     {% endfor %}
                 </div>
             </div> 
