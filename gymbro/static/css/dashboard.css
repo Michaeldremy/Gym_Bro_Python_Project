@@ -19,16 +19,18 @@ background-image {
 }
 
 .weekday {
-    padding-top: 1.5em;
+    padding-top: 1em;
+    height: 4em;
     margin: 0.5em;
     display: flex;
     
 }
 
 #buttonbig {
-    width: 30%;
-    height: 3em;
-    border-radius: 1em;
+    width: 25%;
+    border-radius: 0.75em;
     margin-left: auto;
     margin-right: auto;
 }
+
+
