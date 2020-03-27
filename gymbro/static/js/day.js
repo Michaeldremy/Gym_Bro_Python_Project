@@ -99,6 +99,10 @@ function pauseTimer(event){
     this.classList.add('play');
     clearInterval(intervalTimer);
     isPaused = isPaused ? false : true ;
+    setterBtns.forEach(function(btn){
+      btn.disabled = false;
+      btn.style.opacity = 1;
+    });
   }
 }
 
