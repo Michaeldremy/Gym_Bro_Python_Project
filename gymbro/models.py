@@ -30,10 +30,8 @@ class UserManager(models.Manager):
             # Password Check
         if postData['form_password'] != postData['form_confirm']:
             errors["confirm_password"] = "Passwords do not match"
-        elif len(postData['form_password']) < 8:
-            errors["password_length"] = "Passwords must be at least 8 characters"
-            #convert date time from a string to a number
-            # make sure release date is in the past
+        elif len(postData['form_password']) < 5:
+            errors["password_length"] = "Passwords must be at least 5 characters"
         return errors
 
     def login_validator(self, postData):
